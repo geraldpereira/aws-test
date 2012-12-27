@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>fr.byob</groupId>
+    <artifactId>aws-test</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>aws-test-rest-jetty</artifactId>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>fr.byob</groupId>
+			<artifactId>aws-test-rest</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- Guice dependencies -->
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-servlet</artifactId>
+			<version>${guice-servlet.version}</version>
+		</dependency>
+	</dependencies>
+</project>
