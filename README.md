@@ -14,4 +14,5 @@ Tehnos :
 - JSON
 - JUnit
 
-To be deployed on an EC2 instance.
+EC2 instance deployment process (Jetty version) :
+- TODO
