@@ -7,7 +7,7 @@ import com.google.inject.Injector;
 
 import fr.byob.aws.commons.guice.LoggerModule;
 import fr.byob.aws.dynamodb.dao.impl.DynamoDBModule;
-import fr.byob.aws.rest.RESTJerseyServletModule;
+import fr.byob.aws.rest.ResourcesModule;
 
 public abstract class AbstractResourceTest {
 
@@ -16,6 +16,6 @@ public abstract class AbstractResourceTest {
 	@BeforeClass
 	public static void beforeClass() {
 		injector = Guice.createInjector(new LoggerModule(),
-				new RESTJerseyServletModule(), new DynamoDBModule());
+				new ResourcesModule(), new DynamoDBModule());
 	}
 }

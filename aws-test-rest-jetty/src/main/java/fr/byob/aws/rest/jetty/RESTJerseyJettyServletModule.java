@@ -11,21 +11,17 @@ import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 
 import fr.byob.aws.rest.CORSHeadersFilter;
-import fr.byob.aws.rest.v1x.resource.ProductResource;
 
 
 public class RESTJerseyJettyServletModule extends JerseyServletModule {
 
 	@Override
 	protected void configureServlets() {
-		/* bind the REST resources */
-		bind(ProductResource.class);
-
 		/* bind jackson converters for JAXB/JSON serialization */
 		bind(MessageBodyReader.class).to(JacksonJsonProvider.class);
 		bind(MessageBodyWriter.class).to(JacksonJsonProvider.class);
 
-		final HashMap<String, String> initParams = new HashMap<String, String>();
+		final HashMap<String, String> initParams = new HashMap<>();
 
 		//		 <init-param>
 		//		               <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>

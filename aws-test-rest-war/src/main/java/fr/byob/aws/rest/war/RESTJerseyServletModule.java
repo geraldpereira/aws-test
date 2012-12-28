@@ -1,4 +1,4 @@
-package fr.byob.aws.rest;
+package fr.byob.aws.rest.war;
 
 import java.util.HashMap;
 
@@ -10,16 +10,12 @@ import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 
-import fr.byob.aws.rest.v1x.resource.ProductResource;
+import fr.byob.aws.rest.CORSHeadersFilter;
 
 public class RESTJerseyServletModule extends JerseyServletModule {
 
 	@Override
 	protected void configureServlets() {
-		/* bind the REST resources */
-		this.bind(ProductResource.class);
-		// this.bind(fr.byob.game.memeduel.server.rest.v1x.resource.LevelResource.class);
-
 		/* bind jackson converters for JAXB/JSON serialization */
 		this.bind(MessageBodyReader.class).to(JacksonJsonProvider.class);
 		this.bind(MessageBodyWriter.class).to(JacksonJsonProvider.class);

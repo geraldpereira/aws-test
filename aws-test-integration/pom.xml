@@ -6,7 +6,9 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <artifactId>aws-test-integration</artifactId>
-  
+  <description>
+      Jersey client used to test AWS-TEST restfull web services.      
+  </description>
   <properties>
 		<jersey.version>1.12</jersey.version>
 	</properties>

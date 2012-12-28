@@ -5,14 +5,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>MemeDuel-server-REST</title>
+        <title>Warning</title>
     </head>
     <body>
-        <h1>MemeDuel-server-REST</h1>
-        
-        Pas bonnnnn 
-        <ul>
-            <li><a href="http://localhost:8888/api/v1.0/test">Test</a></li>
-        </ul>
+        GO AWAY !
     </body>
 </html>
