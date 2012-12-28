@@ -57,7 +57,10 @@ public class AbstractResourceTest {
 			}
 		});
 		// Init web resource
-		webResource = client.resource("http://localhost:8080/api/v1.0");
+		webResource = client.resource("http://localhost:10080/api/v1.0");
+		
+		// TODO api/ webResource = client.resource("http://localhost:8080/api/v1.0");
+		
 		// webResource =
 		// client.resource("http://memeduel-server.appspot.com/api/v1.0");
 

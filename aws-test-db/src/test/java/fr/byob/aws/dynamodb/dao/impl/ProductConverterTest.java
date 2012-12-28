@@ -4,7 +4,8 @@ import static fr.byob.aws.db.dao.ProductDAO.PRICE;
 import static fr.byob.aws.dynamodb.dao.impl.AttributeValueConverter.doubleToAttributeValue;
 import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.itemToProduct;
 import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.productToMap;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.junit.Test;
 import com.amazonaws.services.dynamodb.model.AttributeValue;
 
 import fr.byob.aws.domain.Product;
+import fr.byob.aws.domain.ProductBuilder;
 
 public class ProductConverterTest {
 
@@ -23,7 +25,7 @@ public class ProductConverterTest {
 	
 	@Before
 	public void init (){
-		product = ProductTestUtils.newProduct(); 
+		product = new ProductBuilder().build(); 
 		item = ProductTestUtils.newItem();
 	}
 	

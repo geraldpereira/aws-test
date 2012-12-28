@@ -2,17 +2,18 @@ package fr.byob.aws.commons.guice;
 
 import java.lang.reflect.Field;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.inject.MembersInjector;
 
-class Log4JMembersInjector<T> implements MembersInjector<T> {
+class SLF4JMembersInjector<T> implements MembersInjector<T> {
 	private final Field field;
 	private final Logger logger;
 
-	Log4JMembersInjector(Field field) {
+	SLF4JMembersInjector(Field field) {
 		this.field = field;
-		this.logger = Logger.getLogger(field.getDeclaringClass());
+		this.logger = LoggerFactory.getLogger(field.getDeclaringClass());
 		field.setAccessible(true);
 	}
 

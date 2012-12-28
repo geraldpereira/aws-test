@@ -20,22 +20,7 @@ import java.util.Map;
 
 import com.amazonaws.services.dynamodb.model.AttributeValue;
 
-import fr.byob.aws.domain.Product;
-
 final class ProductTestUtils {
-
-	public final static Product newProduct() {
-		Product product = new Product();
-		product.setId(130);
-		product.setTitle("test1");
-		product.setISBN("test2");
-		product.setAuthors(Arrays.asList("test3", "test4"));
-		product.setPrice(20.99);
-		product.setCategory("test5");
-		product.setDimensions("test6");
-		product.setInPublication(true);
-		return product;
-	}
 
 	public final static Map<String, AttributeValue> newItem() {
 

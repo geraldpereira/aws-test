@@ -11,26 +11,12 @@
 	</properties>
 
 	<dependencies>
-	    <!-- Loggin via log4j -->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.6</version>
 		</dependency>
+		            
 		
 		<!-- injection via guice -->
 		<dependency>
@@ -53,8 +39,8 @@
 		<module>aws-test-db</module>
 		<module>aws-test-dynamodb</module>
 		<module>aws-test-rest</module>
-		<module>aws-test-integration</module>
 		<module>aws-test-rest-jetty</module>
+		<module>aws-test-integration</module>		
 	</modules>
 	
 </project>

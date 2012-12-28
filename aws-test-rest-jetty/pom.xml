@@ -6,7 +6,10 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <artifactId>aws-test-rest-jetty</artifactId>
-
+	<properties>
+		<guice-servlet.version>3.0</guice-servlet.version>
+	</properties>
+  
 	<dependencies>
 
 		<dependency>
@@ -20,6 +23,12 @@
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-servlet</artifactId>
 			<version>${guice-servlet.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty</artifactId>
+			<version>6.1.24</version>
 		</dependency>
 	</dependencies>
 </project>

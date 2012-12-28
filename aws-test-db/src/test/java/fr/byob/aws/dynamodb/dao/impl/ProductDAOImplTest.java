@@ -1,6 +1,7 @@
 package fr.byob.aws.dynamodb.dao.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -12,6 +13,7 @@ import com.google.inject.Injector;
 import fr.byob.aws.db.DAOException;
 import fr.byob.aws.db.dao.ProductDAO;
 import fr.byob.aws.domain.Product;
+import fr.byob.aws.domain.ProductBuilder;
 
 public class ProductDAOImplTest {
 
@@ -29,7 +31,7 @@ public class ProductDAOImplTest {
 	public void before() {
 		productDAO = injector.getInstance(ProductDAO.class);
 		assertNotNull(productDAO);
-		product = ProductTestUtils.newProduct();
+		product = new ProductBuilder().build();
 		assertNotNull(product);
 	}
 

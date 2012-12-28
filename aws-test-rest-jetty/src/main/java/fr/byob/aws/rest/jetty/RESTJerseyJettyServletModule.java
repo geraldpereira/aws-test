@@ -1,4 +1,4 @@
-package fr.byob.gae.server.rest.jetty;
+package fr.byob.aws.rest.jetty;
 
 import java.util.HashMap;
 
@@ -10,24 +10,16 @@ import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 
-import fr.byob.gae.server.rest.AuthenticationFilter;
-import fr.byob.gae.server.rest.CORSHeadersFilter;
-import fr.byob.gae.server.rest.v1x.manager.CarManager;
-import fr.byob.gae.server.rest.v1x.manager.TestManager;
-import fr.byob.gae.server.rest.v1x.manager.impl.CarManagerImpl;
-import fr.byob.gae.server.rest.v1x.manager.impl.TestManagerImpl;
+import fr.byob.aws.rest.CORSHeadersFilter;
+import fr.byob.aws.rest.v1x.resource.ProductResource;
 
 
 public class RESTJerseyJettyServletModule extends JerseyServletModule {
 
 	@Override
 	protected void configureServlets() {
-		bind(TestManager.class).to(TestManagerImpl.class);
-		bind(CarManager.class).to(CarManagerImpl.class);
-
 		/* bind the REST resources */
-		bind(fr.byob.gae.server.rest.v1x.resource.TestResource.class);
-		bind(fr.byob.gae.server.rest.v1x.resource.CarResource.class);
+		bind(ProductResource.class);
 
 		/* bind jackson converters for JAXB/JSON serialization */
 		bind(MessageBodyReader.class).to(JacksonJsonProvider.class);
@@ -48,10 +40,9 @@ public class RESTJerseyJettyServletModule extends JerseyServletModule {
 		//	</init-param>
 
 		initParams.put("com.sun.jersey.api.json.POJOMappingFeature", "true");
-		initParams.put("com.sun.jersey.config.property.packages",
-						"fr.byob.gae.server.rest.model.exception;fr.byob.gae.server.rest.v1x");
-		serve("/*").with(GuiceContainer.class, initParams);
-		filter("/*").through(CORSHeadersFilter.class);
-		filter("/*").through(AuthenticationFilter.class);
+		initParams.put("com.sun.jersey.config.property.packages", "fr.byob.aws.rest.exception;fr.byob.aws.rest.v1x");
+
+		this.serve("/api/*").with(GuiceContainer.class, initParams);
+		this.filter("/*").through(CORSHeadersFilter.class);
 	}
 }

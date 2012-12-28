@@ -1,4 +1,4 @@
-package fr.byob.gae.server.rest.jetty;
+package fr.byob.aws.rest.jetty;
 
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.servlet.Context;

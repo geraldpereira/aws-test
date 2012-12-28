@@ -7,6 +7,6 @@ public class LoggerModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		bindListener(Matchers.any(), new Log4JTypeListener());
+		bindListener(Matchers.any(), new SLF4JTypeListener());
 	}
 }

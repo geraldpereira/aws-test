@@ -1,4 +1,4 @@
-package fr.byob.gae.server.rest.jetty;
+package fr.byob.aws.rest.jetty;
 
 import java.io.IOException;
 
