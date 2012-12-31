@@ -19,7 +19,7 @@ EC2 instance deployment process :
 - Upgrade the OS 
   - sudo yum upgrade
 - Install JDK 1.7 // Optionnal for tomcat ? for jetty ?
-  - sudo install java-1.7.0-openjdk
+  - sudo yum install java-1.7.0-openjdk-devel
   - sudo yum remove java-1.6.0-openjdk
 
 - For jetty :
@@ -38,6 +38,7 @@ EC2 instance deployment process :
   - TODO
 
 TODO
+- Test on tomcat7
 - HTTPS
 - Load balancer
 - JMeter => Tomcat vs Jetty perf (mock DynamoDB to stay in the AWS free tier)
