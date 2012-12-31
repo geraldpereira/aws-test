@@ -25,11 +25,17 @@ EC2 instance deployment process :
 - For jetty :
   - Download and extract http://wiki.eclipse.org/Jetty/Starting/Downloads
   - Install as a service http://jawher.net/2009/12/18/manually-installing-a-recent-version-of-jetty-as-a-service-in-linux/
+  - Configure server for high load http://wiki.eclipse.org/Jetty/Howto/High_Load
+  - Configure Iptables http://www.eclipse.org/jetty/documentation/current/setting-port80-access.html
+    sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+    sudo service iptables save
+    sudo service iptables restart
+  - Upload war to $JETTY_HOME/webapps
+  - Restart jetty 'service jetty restart'
 
 - For tomcat :
   - sudo yum install tomcat7
-
-- TODO Upload war, create image
+  - TODO
 
 TODO
 - HTTPS
