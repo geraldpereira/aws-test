@@ -33,12 +33,7 @@ EC2 instance deployment process :
   - Upload war to $JETTY_HOME/webapps
   - Restart jetty 'service jetty restart'
 
-- For tomcat :
-  - sudo yum install tomcat7
-  - TODO
-
 TODO
-- Test on tomcat7
 - HTTPS
 - Load balancer
 - JMeter => Tomcat vs Jetty perf (mock DynamoDB to stay in the AWS free tier)
