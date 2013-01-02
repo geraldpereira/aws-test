@@ -36,7 +36,8 @@ EC2 instance deployment process :
   - Restart jetty 'service jetty restart'
 
 TODO
-- HTTPS
 - Load balancer
+- VPS
+- HTTPS
 - JMeter => Tomcat vs Jetty perf (mock DynamoDB to stay in the AWS free tier)
 
