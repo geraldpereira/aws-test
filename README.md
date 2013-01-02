@@ -37,7 +37,7 @@ EC2 instance deployment process :
 
 TODO
 - Load balancer
-- VPS
+- VPC
 - HTTPS
 - JMeter => Tomcat vs Jetty perf (mock DynamoDB to stay in the AWS free tier)
 
