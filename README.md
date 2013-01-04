@@ -17,21 +17,21 @@ Tehnos :
 EC2 instance deployment process :
 - Create a new Amazon Linux instance
 - Upgrade the OS 
-    sudo yum upgrade
+    + sudo yum upgrade
 - Install JDK 1.7 // Optionnal for tomcat ? for jetty ?
-    sudo yum install java-1.7.0-openjdk-devel
-    sudo yum remove java-1.6.0-openjdk
+    + sudo yum install java-1.7.0-openjdk-devel
+    + sudo yum remove java-1.6.0-openjdk
 
 - For jetty :
   - Download and extract http://wiki.eclipse.org/Jetty/Starting/Downloads
   - Install as a service http://jawher.net/2009/12/18/manually-installing-a-recent-version-of-jetty-as-a-service-in-linux/
-      chkconfig --add jetty
-      chkconfig jetty on
+      + chkconfig --add jetty
+      + chkconfig jetty on
   - Configure server for high load http://wiki.eclipse.org/Jetty/Howto/High_Load
   - Configure Iptables http://www.eclipse.org/jetty/documentation/current/setting-port80-access.html
-      sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
-      sudo service iptables save
-      sudo service iptables restart
+      + sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+      + sudo service iptables save
+      + sudo service iptables restart
   - Upload war to $JETTY_HOME/webapps
   - Restart jetty 'service jetty restart'
 
@@ -39,5 +39,6 @@ TODO
 - Load balancer
 - VPC
 - HTTPS
+- LoadBalancer DNS (aws.byob.fr) http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/DeveloperGuide/using-domain-names-with-elb.html
 - JMeter => Tomcat vs Jetty perf (mock DynamoDB to stay in the AWS free tier)
 
