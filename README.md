@@ -36,7 +36,8 @@ EC2 instance deployment process :
   - Restart jetty 'service jetty restart'
 
 TODO
-- Load balancer
+- credentials.properties
+- Publish via ant
 - VPC
 - HTTPS
 - LoadBalancer DNS (aws.byob.fr) http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/DeveloperGuide/using-domain-names-with-elb.html
