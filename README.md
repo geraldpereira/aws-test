@@ -36,10 +36,10 @@ EC2 instance deployment process :
   - Restart jetty 'service jetty restart'
 
 TODO
-- credentials.properties
-- Publish via ant
-- VPC
+- Deploy / Publish via ant
+- Add a service that returns the host url
+- Check that the load balancer works
 - HTTPS
-- LoadBalancer DNS (aws.byob.fr) http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/DeveloperGuide/using-domain-names-with-elb.html
-- JMeter => Tomcat vs Jetty perf (mock DynamoDB to stay in the AWS free tier)
+- VPC
+- JMeter => Long running tests and burst
 
