@@ -8,6 +8,7 @@
 
 	<properties>
     	<guice.version>3.0</guice.version>
+    	<aws.version>1.3.26</aws.version>
 	</properties>
 
 	<dependencies>
@@ -42,6 +43,7 @@
 		<module>aws-test-rest-jetty</module>
 		<module>aws-test-integration</module>
 		<module>aws-test-rest-war</module>
+		<module>aws-test-deployer</module>
 	</modules>
 	
 </project>

@@ -13,7 +13,7 @@ public class Launcher {
 	private final Server server;
 
 	public Launcher() throws Exception {
-		server = new Server(10080);
+		server = new Server(8080);
 		final Context root = new Context(server, "/", Context.SESSIONS);
 		root.addEventListener(new GuiceServletConfig());
 		root.addFilter(GuiceFilter.class, "/*", 0);

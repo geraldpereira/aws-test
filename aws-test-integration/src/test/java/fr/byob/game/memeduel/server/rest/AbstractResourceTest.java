@@ -30,7 +30,7 @@ public class AbstractResourceTest {
 	// protected final LocalServiceTestHelper helper = new
 	// LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
 
-	protected static Injector injector;
+	protected static Injector tartiflette;
 
 	// @Before
 	// public void before() {
@@ -57,9 +57,11 @@ public class AbstractResourceTest {
 			}
 		});
 		// Init web resource
-		webResource = client.resource("http://localhost:10080/api/v1.0");
+//		webResource = client.resource("http://localhost:8080/api/v1.0");
+		webResource = client.resource("http://aws-test.byob.fr/aws-test/api/v1.0");
+
+		//		webResource = client.resource("http://localhost:10080/api/v1.0");
 		
-		// TODO api/ webResource = client.resource("http://localhost:8080/api/v1.0");
 		
 		// webResource =
 		// client.resource("http://memeduel-server.appspot.com/api/v1.0");

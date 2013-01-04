@@ -1,7 +1,11 @@
 package fr.byob.aws.dynamodb.dao.impl;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+
 import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.PropertiesCredentials;
+import com.amazonaws.services.dynamodb.AmazonDynamoDB;
 import com.amazonaws.services.dynamodb.AmazonDynamoDBClient;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
@@ -13,13 +17,16 @@ public final class DynamoDBModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		bind(AmazonDynamoDBClient.class).toProvider(
-				new Provider<AmazonDynamoDBClient>() {
+		bind(AmazonDynamoDB.class).toProvider(
+				new Provider<AmazonDynamoDB>() {
 					@Override
-					public AmazonDynamoDBClient get() {
-						AWSCredentials credentials = new BasicAWSCredentials(
-								"AKIAJZCQEUO77Y7D4K2A",
-								"vp+SWwm5ppJaC5E01cUEkmt8bJYd00qldL9rpKdf");
+					public AmazonDynamoDB get() {
+						AWSCredentials credentials;
+						try {
+							credentials = new PropertiesCredentials(Paths.get("H:","BYOB","AWS","credentials.properties").toFile());
+						} catch (IOException e) {
+							return null;
+						}
 
 						AmazonDynamoDBClient client = new AmazonDynamoDBClient(
 								credentials);

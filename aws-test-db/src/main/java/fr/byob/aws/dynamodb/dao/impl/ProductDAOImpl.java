@@ -7,7 +7,7 @@ import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.productToMap;
 import java.util.Map;
 
 import com.amazonaws.AmazonServiceException;
-import com.amazonaws.services.dynamodb.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodb.AmazonDynamoDB;
 import com.amazonaws.services.dynamodb.model.AttributeValue;
 import com.amazonaws.services.dynamodb.model.DeleteItemRequest;
 import com.amazonaws.services.dynamodb.model.GetItemRequest;
@@ -23,11 +23,11 @@ import fr.byob.aws.domain.Product;
 
 final class ProductDAOImpl implements ProductDAO {
 
-	private final AmazonDynamoDBClient client;
+	private final AmazonDynamoDB client;
 	private final String tableName;
 
 	@Inject
-	public ProductDAOImpl(final AmazonDynamoDBClient client,
+	public ProductDAOImpl(final AmazonDynamoDB client,
 			@Named("product") final String tableName) {
 		this.client = client;
 		this.tableName = tableName;
