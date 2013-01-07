@@ -3,7 +3,7 @@ aws-test
 
 This sample application is an AWS test. The NoSQL DynamoDB services are accessed through HTTP(S) Restfull WebServices.
 
-Tehnos :
+Technos :
 - DynamoDB
 - Guava
 - Guice
@@ -34,6 +34,11 @@ EC2 instance deployment process :
       + sudo service iptables restart
   - Upload war to $JETTY_HOME/webapps
   - Restart jetty 'service jetty restart'
+
+LoadBalancer creation process
+- Create a load balancer called AWSTestLoadBalancer
+- Redirect port 80
+- set ping path to /aws-test/index.jsp
 
 TODO
 - Deploy / Publish via ant
