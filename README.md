@@ -41,7 +41,8 @@ LoadBalancer creation process
 - set ping path to /aws-test/index.jsp
 
 TODO
-- Deploy / Publish via ant
+- Deploy / Publish via ant => tty issue
+- Idem via maven
 - Conf documentation
 - Add a service that returns the host url
 - Check that the load balancer works
