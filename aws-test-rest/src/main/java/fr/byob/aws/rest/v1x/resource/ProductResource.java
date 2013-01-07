@@ -39,10 +39,11 @@ public class ProductResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/add")
 	public Product add(final Product product) {
-		log.info("ADD " + product);
+		log.info("ADD " + product.getId());
 		try {
 			dao.createProduct(product);
 		} catch (final DAOException e) {
+			log.error("ADD failed", e);
 			throw new IllegalRequestException(e);
 		}
 		return product;
@@ -56,6 +57,7 @@ public class ProductResource {
 		try {
 			return dao.retrieveProduct(id);
 		} catch (DAOException e) {
+			log.error("GET failed", e);
 			throw new IllegalRequestException(e);
 		}
 	}
@@ -67,6 +69,7 @@ public class ProductResource {
 		try{
 			dao.deleteProduct(id);
 		}catch(final DAOException e){
+			log.error("DELETE failed", e);
 			throw new IllegalRequestException(e);
 		}
 	}

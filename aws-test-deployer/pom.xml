@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>fr.byob</groupId>
+		<artifactId>aws-test</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>aws-test-deployer</artifactId>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.8.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>${aws.version}</version>
+		</dependency>
+		<!-- <dependency> <groupId>ant-contrib</groupId> <artifactId>ant-contrib</artifactId> 
+			<version>20020829</version> </dependency> -->
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<!-- maven antrun:run -Pdeploy -->
+			<!-- Used to deploy the application to various AWS instances -->
+			<id>deploy</id>
+			<build>
+				<plugins>
+					<plugin>
+						<inherited>false</inherited>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.6</version>
+						<configuration>
+							<target>
+								<loadproperties srcFile="deploy.properties" />
+
+								<!-- SSH -->
+								<taskdef name="sshexec"
+									classname="org.apache.tools.ant.taskdefs.optional.ssh.SSHExec"
+									classpathref="maven.plugin.classpath" />
+
+								<!-- AWS -->
+								<taskdef name="AWSListInstances" classname="com.byob.aws.ant.AWSListInstances"
+									classpathref="maven.runtime.classpath" />
+
+								<!-- List all instances -->
+								<AWSListInstances region="${aws.region}" />
+
+								<!-- <scp keyfile="${ssh.keyfile}" passphrase="${ssh.keyfile}" todir="${NC.aws.username}@${NC.@{region.name}.@{architecture}.public.ip.address}:/home/${NC.aws.username}" 
+									trust="yes" verbose="${NC.verbose}"> <fileset dir="aws/certificates"> <include 
+									name="*.pem" /> </fileset> </scp> -->
+
+								<!-- <ftp action="send" server="server" remotedir="/a/b" userid="usr" 
+									password="pw" depends="no" verbose="yes" binary="yes"> <fileset dir="modules/my-module/target"> 
+									<include name="my-static-file.zip" /> </fileset> </ftp> -->
+
+								<!-- calls deploy script -->
+								<sshexec host="46.137.142.11" trust="yes" username="${ssh.username}"
+									keyfile="${ssh.keyfile}" passphrase="${ssh.passphrase}"
+									command="echo $JAVA_HOME" />
+
+								<!-- <taskdef name="ftp" classname="org.apache.tools.ant.taskdefs.optional.net.FTP" 
+									classpathref="maven.plugin.classpath" /> -->
+							</target>
+
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>commons-net</groupId>
+								<artifactId>commons-net</artifactId>
+								<version>1.4.1</version>
+							</dependency>
+							<dependency>
+								<groupId>ant</groupId>
+								<artifactId>ant-commons-net</artifactId>
+								<version>1.6.5</version>
+							</dependency>
+							<dependency>
+								<groupId>ant</groupId>
+								<artifactId>ant-jsch</artifactId>
+								<version>1.6.5</version>
+							</dependency>
+							<dependency>
+								<groupId>jsch</groupId>
+								<artifactId>jsch</artifactId>
+								<version>0.1.29</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

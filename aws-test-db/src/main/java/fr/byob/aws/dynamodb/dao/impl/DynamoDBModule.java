@@ -23,7 +23,7 @@ public final class DynamoDBModule extends AbstractModule {
 					public AmazonDynamoDB get() {
 						AWSCredentials credentials;
 						try {
-							credentials = new PropertiesCredentials(Paths.get("H:","BYOB","AWS","credentials.properties").toFile());
+							credentials = new PropertiesCredentials(Paths.get("..","..","conf","credentials.properties").toAbsolutePath().toFile());
 						} catch (IOException e) {
 							return null;
 						}
