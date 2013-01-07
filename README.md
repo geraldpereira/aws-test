@@ -37,6 +37,7 @@ EC2 instance deployment process :
 
 TODO
 - Deploy / Publish via ant
+- Conf documentation
 - Add a service that returns the host url
 - Check that the load balancer works
 - HTTPS
