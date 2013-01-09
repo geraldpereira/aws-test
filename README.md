@@ -42,8 +42,9 @@ LoadBalancer creation process
 
 TODO
 - Deploy / Publish via ant => tty issue
-- Idem via maven
-- Conf documentation
+- Deploy / Publish via maven => is there a maven plugin execute ssh commads ?
+- use maven profiles : dev and prod
+- Configuration documentation 
 - Add a service that returns the host url
 - Check that the load balancer works
 - HTTPS
