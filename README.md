@@ -46,9 +46,8 @@ LoadBalancer creation process
 - set ping path to /aws-test/index.jsp
 
 TODO
-- Deploy / Publish via ant => tty issue
-- Deploy / Publish via maven => is there a maven plugin execute ssh commads ?
-- use maven profiles : dev and prod
+DynamoDBModule works only when a conf file is located in ../../conf/credentials.properties
+    - use maven profiles : dev and prod 
 - Configuration documentation 
 - Add a service that returns the host url
 - Check that the load balancer works
