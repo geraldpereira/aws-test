@@ -16,7 +16,7 @@ public class ProductResourceTest extends AbstractResourceTest {
 	public void testLevel() {
 
 		final Product product =  new ProductBuilder().build();
-		Product returned = webResource.path("/product/add").type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).post(Product.class,product);
+		Product returned = webResource.path("/product/add/").type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).post(Product.class,product);
 		assertEquals(product,returned);
 		
 		returned = webResource.path("/product/get/"+product.getId()).type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(Product.class);

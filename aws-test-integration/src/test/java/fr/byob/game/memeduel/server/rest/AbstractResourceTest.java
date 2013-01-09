@@ -22,25 +22,9 @@ import com.sun.jersey.core.util.Base64;
  */
 public class AbstractResourceTest {
 
-	protected final static String LOGIN = "loginUser";
-	protected final static String PASSWORD = "password";
-
 	protected static WebResource webResource;
 
-	// protected final LocalServiceTestHelper helper = new
-	// LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
-
 	protected static Injector tartiflette;
-
-	// @Before
-	// public void before() {
-	// helper.setUp();
-	// }
-	//
-	// @After
-	// public void after() {
-	// helper.tearDown();
-	// }
 
 	@BeforeClass
 	public static void beforeClass() throws Exception {
@@ -57,21 +41,11 @@ public class AbstractResourceTest {
 			}
 		});
 		// Init web resource
-		//	webResource = client.resource("http://localhost:8080/api/v1.0");
-		webResource = client.resource("http://aws-test.byob.fr/aws-test/api/v1.0");
+			webResource = client.resource("http://localhost:8080/api/v1.0");
+//		webResource = client.resource("http://aws-test.byob.fr/aws-test/api/v1.0");
+//		webResource = client.resource("http://46.137.142.11/aws-test/api/v1.0");
 
 		//		webResource = client.resource("http://localhost:10080/api/v1.0");
-		
-		
-		// webResource =
-		// client.resource("http://memeduel-server.appspot.com/api/v1.0");
 
 	}
-
-	protected final static String computeAuthHeader(final String login, final String password) {
-		final byte[] pwd = Base64.encode(login + ":" + password);
-		final String value = new String(pwd);
-		return "Basic " + value;
-	}
-
 }

@@ -17,12 +17,12 @@ import com.google.common.collect.Lists;
  * @author gpereira
  *
  */
-public class AWSListInstances extends ELBTask{
+public class ELBListInstances extends ELBTask{
 	
 	@Override
 	public void execute() throws BuildException {
 		super.execute();
-		final DescribeLoadBalancersRequest request = new DescribeLoadBalancersRequest(Arrays.asList("AWSTestLoadBalancer"));
+		final DescribeLoadBalancersRequest request = new DescribeLoadBalancersRequest(Arrays.asList(LB_NAME));
 		final DescribeLoadBalancersResult result = client.describeLoadBalancers(request);
 		final List<String> instancesId = Lists.transform(result.getLoadBalancerDescriptions().get(0).getInstances(), new Function<Instance, String>() {
 			public String apply(Instance input) {
@@ -31,7 +31,6 @@ public class AWSListInstances extends ELBTask{
 		});
 		
 		final String joined = Joiner.on(',').join(instancesId);
-		System.out.println(joined);
 		getProject().setProperty("aws.instances", joined);
 	}
 }

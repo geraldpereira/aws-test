@@ -1,4 +1,4 @@
-package fr.byob.aws.rest.war;
+package fr.byob.aws.rest;
 
 import java.util.HashMap;
 

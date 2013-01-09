@@ -8,7 +8,6 @@
 	</parent>
 	<artifactId>aws-test-deployer</artifactId>
 
-
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.ant</groupId>
@@ -20,8 +19,6 @@
 			<artifactId>aws-java-sdk</artifactId>
 			<version>${aws.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>ant-contrib</groupId> <artifactId>ant-contrib</artifactId> 
-			<version>20020829</version> </dependency> -->
 	</dependencies>
 
 	<profiles>
@@ -35,61 +32,107 @@
 						<inherited>false</inherited>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.6</version>
+						<version>1.7</version>
 						<configuration>
 							<target>
 								<loadproperties srcFile="deploy.properties" />
-
-								<!-- SSH -->
-								<taskdef name="sshexec"
-									classname="org.apache.tools.ant.taskdefs.optional.ssh.SSHExec"
+								<!-- Imports -->
+								<!-- Ant contrib -->
+								<taskdef resource="net/sf/antcontrib/antlib.xml"
+									classpathref="maven.plugin.classpath" />
+								<taskdef resource="net/sf/antcontrib/antcontrib.properties"
 									classpathref="maven.plugin.classpath" />
 
 								<!-- AWS -->
-								<taskdef name="AWSListInstances" classname="com.byob.aws.ant.AWSListInstances"
+								<taskdef name="ELBListInstances" classname="com.byob.aws.ant.ELBListInstances"
+									classpathref="maven.runtime.classpath" />
+								<taskdef name="ELBDeregisterInstance" classname="com.byob.aws.ant.ELBDeregisterInstance"
+									classpathref="maven.runtime.classpath" />
+								<taskdef name="ELBRegisterInstance" classname="com.byob.aws.ant.ELBRegisterInstance"
+									classpathref="maven.runtime.classpath" />
+								<taskdef name="EC2DescribeInstance" classname="com.byob.aws.ant.EC2DescribeInstance"
 									classpathref="maven.runtime.classpath" />
 
 								<!-- List all instances -->
-								<AWSListInstances region="${aws.region}" />
+								<ELBListInstances region="${aws.region}" />
 
-								<!-- <scp keyfile="${ssh.keyfile}" passphrase="${ssh.keyfile}" todir="${NC.aws.username}@${NC.@{region.name}.@{architecture}.public.ip.address}:/home/${NC.aws.username}" 
-									trust="yes" verbose="${NC.verbose}"> <fileset dir="aws/certificates"> <include 
-									name="*.pem" /> </fileset> </scp> -->
+								<echo message="Updating aws-test for ${aws.instances}" />
+								<for list="${aws.instances}" param="aws.instance" keepgoing="true"
+									parallel="false">
+									<sequential>
+										<echo
+											message="Retrieve ip address and state for instance @{aws.instance}" />
+										<EC2DescribeInstance region="${aws.region}"
+											instanceId="@{aws.instance}" />
+										<if>
+											<equals arg1="${aws.instance.started}" arg2="true" />
+											<then>
+												<echo
+													message="Unregister instance @{aws.instance} from the load balancer" />
+												<ELBDeregisterInstance region="${aws.region}"
+													instanceId="@{aws.instance}" />
 
-								<!-- <ftp action="send" server="server" remotedir="/a/b" userid="usr" 
-									password="pw" depends="no" verbose="yes" binary="yes"> <fileset dir="modules/my-module/target"> 
-									<include name="my-static-file.zip" /> </fileset> </ftp> -->
+												<echo
+													message="Stop jetty for instance @{aws.instance} - ${aws.instance.ip}" />
+												<sshexec host="${aws.instance.ip}" trust="yes"
+													username="${ssh.username}" keyfile="${ssh.keyfile}"
+													passphrase="${ssh.passphrase}" command="sudo service jetty stop" />
 
-								<!-- calls deploy script -->
-								<sshexec host="46.137.142.11" trust="yes" username="${ssh.username}"
-									keyfile="${ssh.keyfile}" passphrase="${ssh.passphrase}"
-									command="echo $JAVA_HOME" />
+												<echo
+													message="Remove old war for instance @{aws.instance} - ${aws.instance.ip}" />
+												<echo message="rm -f ${war.webapps.path}/aws-test*.war" />
+												<sshexec host="${aws.instance.ip}" trust="yes"
+													username="${ssh.username}" keyfile="${ssh.keyfile}"
+													passphrase="${ssh.passphrase}" command="rm -f ${war.webapps.path}/aws-test*.war" />
 
-								<!-- <taskdef name="ftp" classname="org.apache.tools.ant.taskdefs.optional.net.FTP" 
-									classpathref="maven.plugin.classpath" /> -->
+												<echo
+													message="Send new war for instance @{aws.instance} - ${aws.instance.ip}" />
+												<scp todir="${ssh.username}@46.137.142.11:${war.webapps.path}"
+													keyfile="${ssh.keyfile}" passphrase="${ssh.passphrase}"
+													trust="yes">
+													<fileset dir="${war.local.path}">
+														<include name="${war.local.file}" />
+													</fileset>
+												</scp>
+												<echo
+													message="Start jetty for instance @{aws.instance} - ${aws.instance.ip}" />
+												<sshexec host="${aws.instance.ip}" trust="yes"
+													username="${ssh.username}" keyfile="${ssh.keyfile}"
+													passphrase="${ssh.passphrase}" command="sudo service jetty start &#38;" />
+
+												<echo
+													message="Register instance @{aws.instance} with the load balancer" />
+												<ELBRegisterInstance region="${aws.region}"
+													instanceId="@{aws.instance}" />
+
+											</then>
+										</if>
+									</sequential>
+								</for>
 							</target>
 
 						</configuration>
 						<dependencies>
 							<dependency>
-								<groupId>commons-net</groupId>
-								<artifactId>commons-net</artifactId>
-								<version>1.4.1</version>
-							</dependency>
-							<dependency>
-								<groupId>ant</groupId>
-								<artifactId>ant-commons-net</artifactId>
-								<version>1.6.5</version>
-							</dependency>
-							<dependency>
-								<groupId>ant</groupId>
+								<groupId>org.apache.ant</groupId>
 								<artifactId>ant-jsch</artifactId>
-								<version>1.6.5</version>
+								<version>1.8.4</version>
 							</dependency>
 							<dependency>
-								<groupId>jsch</groupId>
+								<groupId>com.jcraft</groupId>
 								<artifactId>jsch</artifactId>
-								<version>0.1.29</version>
+								<version>0.1.49</version>
+							</dependency>
+							<dependency>
+								<groupId>ant-contrib</groupId>
+								<artifactId>ant-contrib</artifactId>
+								<version>1.0b3</version>
+								<exclusions>
+									<exclusion>
+										<groupId>ant</groupId>
+										<artifactId>ant</artifactId>
+									</exclusion>
+								</exclusions>
 							</dependency>
 						</dependencies>
 					</plugin>

@@ -5,6 +5,8 @@ import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingCli
 
 public abstract class ELBTask extends AWSTask{
 	
+	protected final static String LB_NAME = "AWSTestLoadBalancer";
+	
 	protected final AmazonElasticLoadBalancing client;
 	
 	public ELBTask(){

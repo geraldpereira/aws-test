@@ -9,7 +9,7 @@
 	<description>
 		Standalone AWS-TEST application launcher
 	</description>	
-	<artifactId>aws-test-rest-jetty</artifactId>
+	<artifactId>aws-test-rest-embedded</artifactId>
 	<properties>
 		<guice-servlet.version>3.0</guice-servlet.version>
 	</properties>

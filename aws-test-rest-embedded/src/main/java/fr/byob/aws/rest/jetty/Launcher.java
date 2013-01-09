@@ -5,6 +5,8 @@ import org.mortbay.jetty.servlet.Context;
 
 import com.google.inject.servlet.GuiceFilter;
 
+import fr.byob.aws.rest.GuiceServletConfig;
+
 /**
  * https://github.com/sunnygleason/j4-minimal
  */
