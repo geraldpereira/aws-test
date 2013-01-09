@@ -38,6 +38,8 @@ EC2 instance deployment process :
 - sudoers https://forums.aws.amazon.com/thread.jspa?messageID=295990
   - Comment the line 'Defaults requiretty' in /etc/sudoers
 
+Or use the public image : ami-6c2e2118
+
 LoadBalancer creation process
 - Create a load balancer called AWSTestLoadBalancer
 - Redirect port 80
