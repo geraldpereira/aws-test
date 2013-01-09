@@ -35,6 +35,9 @@ EC2 instance deployment process :
   - Upload war to $JETTY_HOME/webapps
   - Restart jetty 'service jetty restart'
 
+- sudoers https://forums.aws.amazon.com/thread.jspa?messageID=295990
+  - Comment the line 'Defaults requiretty' in /etc/sudoers
+
 LoadBalancer creation process
 - Create a load balancer called AWSTestLoadBalancer
 - Redirect port 80
