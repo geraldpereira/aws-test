@@ -22,9 +22,10 @@ public class ELBListInstances extends ELBTask{
 	@Override
 	public void execute() throws BuildException {
 		super.execute();
-		final DescribeLoadBalancersRequest request = new DescribeLoadBalancersRequest(Arrays.asList(LB_NAME));
+		final DescribeLoadBalancersRequest request = new DescribeLoadBalancersRequest(Arrays.asList(loadBalancerName));
 		final DescribeLoadBalancersResult result = client.describeLoadBalancers(request);
 		final List<String> instancesId = Lists.transform(result.getLoadBalancerDescriptions().get(0).getInstances(), new Function<Instance, String>() {
+			@Override
 			public String apply(Instance input) {
 				return input.getInstanceId();
 			}

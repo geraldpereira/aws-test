@@ -24,7 +24,7 @@ public class ELBDeregisterInstance extends ELBTask {
 		super.execute();
 		checkNotNull(instanceId);
 
-		final DeregisterInstancesFromLoadBalancerRequest request = new DeregisterInstancesFromLoadBalancerRequest(LB_NAME,Arrays.asList(new Instance(instanceId)));
+		final DeregisterInstancesFromLoadBalancerRequest request = new DeregisterInstancesFromLoadBalancerRequest(loadBalancerName,Arrays.asList(new Instance(instanceId)));
 		client.deregisterInstancesFromLoadBalancer(request);
 	}
 

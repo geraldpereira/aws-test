@@ -24,7 +24,7 @@ public class ELBRegisterInstance extends ELBTask {
 		super.execute();
 		checkNotNull(instanceId);
 
-		final RegisterInstancesWithLoadBalancerRequest request = new RegisterInstancesWithLoadBalancerRequest(LB_NAME,Arrays.asList(new Instance(instanceId)));
+		final RegisterInstancesWithLoadBalancerRequest request = new RegisterInstancesWithLoadBalancerRequest(loadBalancerName,Arrays.asList(new Instance(instanceId)));
 		client.registerInstancesWithLoadBalancer(request);
 	}
 

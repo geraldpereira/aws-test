@@ -8,6 +8,14 @@
 	</parent>
 	<artifactId>aws-test-deployer</artifactId>
 
+	<description>
+		Deploys the local aws-test-rest-war file to the remote jetty servers : 
+			- gets the lists of AWS instances that are load balanced,
+			- for each instance deregisters it from the load balancer
+			- deploys the war
+			- registers the instance with the load balancer
+	</description>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.ant</groupId>
@@ -54,7 +62,8 @@
 									classpathref="maven.runtime.classpath" />
 
 								<!-- List all instances -->
-								<ELBListInstances region="${aws.region}" />
+								<ELBListInstances region="${aws.region}"
+									loadBalancerName="${aws.loadbalancer.name}" />
 
 								<echo message="Updating aws-test for ${aws.instances}" />
 								<for list="${aws.instances}" param="aws.instance" keepgoing="true"
@@ -67,10 +76,9 @@
 										<if>
 											<equals arg1="${aws.instance.started}" arg2="true" />
 											<then>
-												<echo
-													message="Unregister instance @{aws.instance} from the load balancer" />
+												<echo message="Unregister instance @{aws.instance} from the load balancer" />
 												<ELBDeregisterInstance region="${aws.region}"
-													instanceId="@{aws.instance}" />
+													instanceId="@{aws.instance}" loadBalancerName="${aws.loadbalancer.name}" />
 
 												<echo
 													message="Stop jetty for instance @{aws.instance} - ${aws.instance.ip}" />
@@ -79,31 +87,37 @@
 													passphrase="${ssh.passphrase}" command="sudo service jetty stop" />
 
 												<echo
-													message="Remove old war for instance @{aws.instance} - ${aws.instance.ip}" />
+													message="Remove old war and context for instance @{aws.instance} - ${aws.instance.ip}" />
 												<echo message="rm -f ${war.webapps.path}/aws-test*.war" />
 												<sshexec host="${aws.instance.ip}" trust="yes"
 													username="${ssh.username}" keyfile="${ssh.keyfile}"
-													passphrase="${ssh.passphrase}" command="rm -f ${war.webapps.path}/aws-test*.war" />
+													passphrase="${ssh.passphrase}"
+													command="rm -f ${remote.webapps.dir}/aws-test*.war;
+															rm -f ${remote.contexts.dir}/aws-test*.xml" />
 
 												<echo
-													message="Send new war for instance @{aws.instance} - ${aws.instance.ip}" />
-												<scp todir="${ssh.username}@46.137.142.11:${war.webapps.path}"
+													message="Send new war and context for instance @{aws.instance} - ${aws.instance.ip}" />
+
+												<scp file="${local.war.path}"
+													remoteTofile="${ssh.username}@${aws.instance.ip}:${remote.war.path}"
 													keyfile="${ssh.keyfile}" passphrase="${ssh.passphrase}"
-													trust="yes">
-													<fileset dir="${war.local.path}">
-														<include name="${war.local.file}" />
-													</fileset>
-												</scp>
+													trust="yes" />
+
+												<scp file="${local.context.path}"
+													remoteTofile="${ssh.username}@${aws.instance.ip}:${remote.context.path}"
+													keyfile="${ssh.keyfile}" passphrase="${ssh.passphrase}"
+													trust="yes" />
+
 												<echo
 													message="Start jetty for instance @{aws.instance} - ${aws.instance.ip}" />
-												<sshexec host="${aws.instance.ip}" trust="yes"
+												<sshexec host="${aws.instance.ip}" trust="yes" failonerror="false" timeout="5000"
 													username="${ssh.username}" keyfile="${ssh.keyfile}"
 													passphrase="${ssh.passphrase}" command="sudo service jetty start &#38;" />
 
 												<echo
 													message="Register instance @{aws.instance} with the load balancer" />
 												<ELBRegisterInstance region="${aws.region}"
-													instanceId="@{aws.instance}" />
+													instanceId="@{aws.instance}" loadBalancerName="${aws.loadbalancer.name}" />
 
 											</then>
 										</if>

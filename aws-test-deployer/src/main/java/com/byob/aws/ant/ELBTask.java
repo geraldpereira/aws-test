@@ -5,7 +5,7 @@ import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingCli
 
 public abstract class ELBTask extends AWSTask{
 	
-	protected final static String LB_NAME = "AWSTestLoadBalancer";
+	protected String loadBalancerName;
 	
 	protected final AmazonElasticLoadBalancing client;
 	
@@ -18,5 +18,13 @@ public abstract class ELBTask extends AWSTask{
 	public void setRegion(String region) {
 		super.setRegion(region);
 		client.setEndpoint("https://elasticloadbalancing."+region+".amazonaws.com");
+	}
+	
+	public void setLoadBalancerName(String loadBalancerName) {
+		this.loadBalancerName = loadBalancerName;
+	}
+	
+	public String getLoadBalancerName() {
+		return loadBalancerName;
 	}
 }

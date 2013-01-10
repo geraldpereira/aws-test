@@ -41,8 +41,8 @@ public class AbstractResourceTest {
 			}
 		});
 		// Init web resource
-			webResource = client.resource("http://localhost:8080/api/v1.0");
-//		webResource = client.resource("http://aws-test.byob.fr/aws-test/api/v1.0");
+//			webResource = client.resource("http://localhost:8080/aws-test/api/v1.0");
+		webResource = client.resource("http://aws-test.byob.fr/aws-test/api/v1.0");
 //		webResource = client.resource("http://46.137.142.11/aws-test/api/v1.0");
 
 		//		webResource = client.resource("http://localhost:10080/api/v1.0");

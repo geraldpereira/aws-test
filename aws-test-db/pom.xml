@@ -7,6 +7,13 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>aws-test-dynamodb</artifactId>
+	<description>
+		DynamoDB version of the aws-test-db API.		
+		You must set the VM argument properties.credentials to the path to a file that contains :
+		  	accessKey=your_aws_key
+			secretKey=your_aws_secret_key
+		For example, you can add the VM argument -Dproperties.credentials=../../conf/credentials.properties when you launch the unit tests or the aws-test-rest-embedded Launcher.		 
+	</description>
 
 	<dependencies>
 
@@ -25,7 +32,6 @@
 
 	<build>
 		<plugins>
-
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.0.2</version>
@@ -34,7 +40,6 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 
