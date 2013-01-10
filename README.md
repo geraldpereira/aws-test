@@ -46,9 +46,7 @@ LoadBalancer creation process
 - set ping path to /aws-test/index.jsp
 
 TODO
-DynamoDBModule works only when a conf file is located in ../../conf/credentials.properties
-    - use maven profiles : dev and prod 
-- Configuration documentation 
+- Deployer should include the jetty confiration.xml file
 - Add a service that returns the host url
 - Check that the load balancer works
 - HTTPS
