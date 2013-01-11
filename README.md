@@ -50,4 +50,5 @@ TODO
 -   http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin
 - VPC
 - JMeter => Long running tests and burst
+- Authentication ? already done for memeduel, it should be straightforward
 
