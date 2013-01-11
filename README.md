@@ -46,10 +46,10 @@ LoadBalancer creation process
 - set ping path to /aws-test/index.jsp
 
 TODO
-- HTTPS
-- system properties => <jettyEnvXml> Optional. Location of a jetty-env.xml file, which allows you to make JNDI bindings that satisfies <env-entry>, <resource-env-ref> and <resource-ref> linkages in the web.xml. Note that these can also be made in a <jettyXml> file if you want them to apply to more than one webapp.
--   http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin
+- HTTPS and AWS load balancer => write documentation / blog post for the whole process
 - VPC
 - JMeter => Long running tests and burst
+- system properties => <jettyEnvXml> Optional. Location of a jetty-env.xml file, which allows you to make JNDI bindings that satisfies <env-entry>, <resource-env-ref> and <resource-ref> linkages in the web.xml. Note that these can also be made in a <jettyXml> file if you want them to apply to more than one webapp.
+    - http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin
 - Authentication ? already done for memeduel, it should be straightforward
 
