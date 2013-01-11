@@ -30,6 +30,7 @@ EC2 instance deployment process :
   - Configure server for high load http://wiki.eclipse.org/Jetty/Howto/High_Load
   - Configure Iptables http://www.eclipse.org/jetty/documentation/current/setting-port80-access.html
       + sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+      + sudo iptables -t nat -I PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443
       + sudo service iptables save
       + sudo service iptables restart
   - Upload war to $JETTY_HOME/webapps
