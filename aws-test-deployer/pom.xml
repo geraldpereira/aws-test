@@ -27,6 +27,13 @@
 			<artifactId>aws-java-sdk</artifactId>
 			<version>${aws.version}</version>
 		</dependency>
+		<!-- Only for org.eclipse.jetty.http.util.Password -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-util</artifactId>
+			<version>8.1.8.v20121106</version>
+		</dependency>
+
 	</dependencies>
 
 	<profiles>
@@ -76,7 +83,8 @@
 										<if>
 											<equals arg1="${aws.instance.started}" arg2="true" />
 											<then>
-												<echo message="Unregister instance @{aws.instance} from the load balancer" />
+												<echo
+													message="Unregister instance @{aws.instance} from the load balancer" />
 												<ELBDeregisterInstance region="${aws.region}"
 													instanceId="@{aws.instance}" loadBalancerName="${aws.loadbalancer.name}" />
 
@@ -107,12 +115,20 @@
 													remoteTofile="${ssh.username}@${aws.instance.ip}:${remote.context.path}"
 													keyfile="${ssh.keyfile}" passphrase="${ssh.passphrase}"
 													trust="yes" />
+	
+												<echo
+													message="Send new jetty.xml file for instance @{aws.instance} - ${aws.instance.ip}" />	
+												<scp file="${local.jetty.path}"
+													remoteTofile="${ssh.username}@${aws.instance.ip}:${remote.jetty.path}"
+													keyfile="${ssh.keyfile}" passphrase="${ssh.passphrase}"
+													trust="yes" />
 
 												<echo
 													message="Start jetty for instance @{aws.instance} - ${aws.instance.ip}" />
-												<sshexec host="${aws.instance.ip}" trust="yes" failonerror="false" timeout="5000"
-													username="${ssh.username}" keyfile="${ssh.keyfile}"
-													passphrase="${ssh.passphrase}" command="sudo service jetty start &#38;" />
+												<sshexec host="${aws.instance.ip}" trust="yes"
+													failonerror="false" timeout="5000" username="${ssh.username}"
+													keyfile="${ssh.keyfile}" passphrase="${ssh.passphrase}"
+													command="sudo service jetty start &#38;" />
 
 												<echo
 													message="Register instance @{aws.instance} with the load balancer" />

@@ -7,6 +7,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>aws-test-rest</artifactId>
+	<packaging>war</packaging>
 	<name>aws-test server REST</name>
 	<properties>
 		<jersey.version>1.12</jersey.version>
@@ -55,7 +56,7 @@
 			<artifactId>jersey-guice</artifactId>
 			<version>${jersey-guice.version}</version>
 		</dependency>
-		
+
 		<!-- provided at runtime by servlet container -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -79,6 +80,20 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
+				<!--  -Dproperties.credentials=../../conf/credentials.properties -->
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<jettyXml>jetty.xml</jettyXml>
+					<webApp>
+						<contextPath>/aws-test</contextPath>
+					</webApp>
+					<contextXml>aws-test.xml</contextXml>
 				</configuration>
 			</plugin>
 		</plugins>

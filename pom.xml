@@ -46,8 +46,6 @@
 		<module>aws-test-db</module>
 		<module>aws-test-dynamodb</module>
 		<module>aws-test-rest</module>
-		<module>aws-test-rest-embedded</module>
-		<module>aws-test-rest-war</module>
 	</modules>
 	
 	<build>

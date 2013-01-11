@@ -2,8 +2,6 @@ package fr.byob.aws.rest.exception;
 
 import com.sun.jersey.api.client.ClientResponse.Status;
 
-import fr.byob.aws.db.DAOException;
-
 public class IllegalRequestException extends RuntimeException {
 
 	private static final long serialVersionUID = -7421895058638572651L;
@@ -11,7 +9,7 @@ public class IllegalRequestException extends RuntimeException {
 	private Status status;
 	private int errorCode;
 
-	public IllegalRequestException(final DAOException exception) {
+	public IllegalRequestException(final Exception exception) {
 		this(exception.getMessage());
 	}
 

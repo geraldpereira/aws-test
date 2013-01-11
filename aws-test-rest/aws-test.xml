@@ -38,7 +38,7 @@
 			properties.credentials
 		</Arg>
 		<Arg>
-			/home/ec2-user/conf/credentials.properties
+			../../conf/credentials.properties
 		</Arg>
 	</Call>
 </Configure>

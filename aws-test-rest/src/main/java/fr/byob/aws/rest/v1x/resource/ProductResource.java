@@ -1,5 +1,8 @@
 package fr.byob.aws.rest.v1x.resource;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,18 +25,17 @@ import fr.byob.aws.rest.v1x.V1XConstants;
 
 @Path(V1XConstants.PATH + "/product/")
 public class ProductResource {
-	
+
 	@InjectLogger
 	private Logger log;
-	
+
 	private final ProductDAO dao;
-	
+
 	@Inject
-	public ProductResource(final ProductDAO dao){
+	public ProductResource(final ProductDAO dao) {
 		this.dao = dao;
 	}
-	
-	
+
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -62,16 +64,33 @@ public class ProductResource {
 		}
 	}
 
-	@DELETE // @GET Does not work with some web browsers
+	@DELETE
+	// @GET Does not work with some web browsers
 	@Path("/delete/{id}")
 	public void delete(@PathParam("id") final Integer id) {
 		log.info("DELETE " + id);
-		try{
+		try {
 			dao.deleteProduct(id);
-		}catch(final DAOException e){
+		} catch (final DAOException e) {
 			log.error("DELETE failed", e);
 			throw new IllegalRequestException(e);
 		}
 	}
 
+	@GET
+	@Path("/test")
+	@Produces({ MediaType.TEXT_PLAIN })
+	public String test() {
+		log.info("TEST");
+		try {
+			return getHostname();
+		} catch (final UnknownHostException e) {
+			log.error("TEST failed", e);
+			throw new IllegalRequestException(e);
+		}
+	}
+
+	private static String getHostname() throws UnknownHostException {
+		return InetAddress.getLocalHost().getHostName();
+	}
 }

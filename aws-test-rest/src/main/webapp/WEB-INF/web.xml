@@ -23,7 +23,7 @@
 		<url-pattern>/api/*</url-pattern>
 	</filter-mapping>
 	<listener>
-		<listener-class>fr.byob.aws.rest.war.GuiceServletConfig</listener-class>
+		<listener-class>fr.byob.aws.rest.GuiceServletConfig</listener-class>
 	</listener>
 
 	<!-- <security-constraint>
