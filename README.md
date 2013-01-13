@@ -4,6 +4,7 @@ aws-test
 This sample application is an AWS test. The NoSQL DynamoDB services are accessed through HTTP(S) Restfull WebServices.
 
 - aws-test-commons : common classes, just a logger guice injector for now.
+    - https://github.com/Kojir0/aws-test/blob/master/aws-test-deployer/README.md
 - aws-test-db : the database interfaces
 - aws-test-dynamodb : the dynamodb implementation of the aws-test-db interfaces
 - aws-test-rest : the REST Web services part of the project
