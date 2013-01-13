@@ -14,7 +14,9 @@ Technos :
 - JSON
 - JUnit
 
-EC2 instance deployment process :
+EC2 instance deployment process
+-------------------------------
+
 - Create a new Amazon Linux instance
 - Upgrade the OS 
     + sudo yum upgrade
@@ -41,11 +43,15 @@ EC2 instance deployment process :
 
 
 LoadBalancer creation process
-- Create a load balancer called AWSTestLoadBalancer
-- Redirect port 80
-- set ping path to /aws-test/index.jsp
+-----------------------------
+
+1. Create a load balancer called AWSTestLoadBalancer
+2. Redirect port 80
+3. set ping path to /aws-test/index.jsp
 
 TODO
+----
+
 - HTTPS and AWS load balancer => write documentation / blog post for the whole process
 - VPC
 - JMeter => Long running tests and burst
