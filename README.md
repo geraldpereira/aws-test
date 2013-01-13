@@ -27,8 +27,7 @@ Technos :
 TODO
 ----
 
-- Deployer => configure path to aws credentials via system properties + readme
-- HTTPS and AWS load balancer => write documentation / blog post for the whole process
+- HTTPS and AWS load balancer
 - VPC
 - JMeter => Long running tests and burst
 - system properties => <jettyEnvXml> Optional. Location of a jetty-env.xml file, which allows you to make JNDI bindings that satisfies <env-entry>, <resource-env-ref> and <resource-ref> linkages in the web.xml. Note that these can also be made in a <jettyXml> file if you want them to apply to more than one webapp.
