@@ -2,10 +2,10 @@ aws-test-deployer
 =================
 
 This module is used to deploy the local aws-test-rest-war file to AWS : EC2 instances accessed via a load balancer called AWSTestLoadBalancer (deployment processes bellow).
-  		- gets the lists of AWS instances that are load balanced,
-			- for each instance deregisters it from the load balancer
-			- deploys the war
-			- registers the instance with the load balancer
+- gets the lists of AWS instances that are load balanced,
+- for each instance deregisters it from the load balancer
+- deploys the war
+- registers the instance with the load balancer
  
 EC2 instance deployment process
 -------------------------------
