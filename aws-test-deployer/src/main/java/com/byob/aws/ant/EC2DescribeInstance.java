@@ -8,9 +8,11 @@ import org.apache.tools.ant.BuildException;
 
 import com.amazonaws.services.ec2.model.DescribeInstancesRequest;
 import com.amazonaws.services.ec2.model.DescribeInstancesResult;
+import com.amazonaws.services.ec2.model.Instance;
 
 /**
  * Describes an EC2 instance : its ip address is stored in aws.instance.ip
+ * aws.instance.started is true is the instance is in state RUNNING
  * @author gpereira
  *
  */
@@ -26,8 +28,9 @@ public class EC2DescribeInstance extends EC2Task {
 		final DescribeInstancesRequest request = new DescribeInstancesRequest();
 		request.setInstanceIds(Arrays.asList(instanceId));
 		final DescribeInstancesResult result = client.describeInstances(request);
-		final String ipAddress = result.getReservations().get(0).getInstances().get(0).getPublicIpAddress();
-		final boolean started = "running".equals(result.getReservations().get(0).getInstances().get(0).getState().getName());
+		final Instance instance = result.getReservations().get(0).getInstances().get(0);
+		final String ipAddress = instance.getPublicIpAddress();
+		final boolean started = "running".equals(instance.getState().getName());
 		getProject().setProperty("aws.instance.ip", ipAddress);
 		getProject().setProperty("aws.instance.started", ""+started);
 	}

@@ -10,8 +10,7 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 	<Set name="contextPath">/aws-test</Set>
 	<Set name="war">
-		<SystemProperty name="jetty.home" default="." />
-		/webapps/aws-test.war
+		<SystemProperty name="jetty.home" default="." />/webapps/aws-test.war
 	</Set>
 	
 	<!-- Require ssl connection ! -->
@@ -32,7 +31,7 @@
             </Call>
         </New>
      </Set>
-	
+	<!-- Configures the path to the AWS credentials.properties file on the remote server -->
 	<Call class="java.lang.System" name="setProperty">
 		<Arg>
 			properties.credentials

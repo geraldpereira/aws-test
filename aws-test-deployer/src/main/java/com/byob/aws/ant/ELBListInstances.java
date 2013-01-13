@@ -13,7 +13,8 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 /**
- * Lists all aws instances
+ * Lists all aws instances => result is stored in aws.instances
+ * 
  * @author gpereira
  *
  */

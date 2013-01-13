@@ -1,22 +1,32 @@
 package com.byob.aws.ant;
 
+import org.apache.tools.ant.BuildException;
+
 import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancing;
 import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient;
+import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * Abstract task for Elastic Load Balancer 
+ * 
+ * @author Kojiro
+ *
+ */
 public abstract class ELBTask extends AWSTask{
 	
 	protected String loadBalancerName;
 	
-	protected final AmazonElasticLoadBalancing client;
+	protected AmazonElasticLoadBalancing client;
 	
 	public ELBTask(){
 		super();
-		client = new AmazonElasticLoadBalancingClient(credentials);
 	}
 
 	@Override
-	public void setRegion(String region) {
-		super.setRegion(region);
+	public void execute() throws BuildException {
+		super.execute();
+		checkNotNull(loadBalancerName);
+		client = new AmazonElasticLoadBalancingClient(credentials);
 		client.setEndpoint("https://elasticloadbalancing."+region+".amazonaws.com");
 	}
 	

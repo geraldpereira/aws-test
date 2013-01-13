@@ -70,7 +70,7 @@
 
 								<!-- List all instances -->
 								<ELBListInstances region="${aws.region}"
-									loadBalancerName="${aws.loadbalancer.name}" />
+									loadBalancerName="${aws.loadbalancer.name}" credentialsPath="${aws.credentials.properties}"/>
 
 								<echo message="Updating aws-test for ${aws.instances}" />
 								<for list="${aws.instances}" param="aws.instance" keepgoing="true"
@@ -79,14 +79,14 @@
 										<echo
 											message="Retrieve ip address and state for instance @{aws.instance}" />
 										<EC2DescribeInstance region="${aws.region}"
-											instanceId="@{aws.instance}" />
+											instanceId="@{aws.instance}" credentialsPath="${aws.credentials.properties}"/>
 										<if>
 											<equals arg1="${aws.instance.started}" arg2="true" />
 											<then>
 												<echo
 													message="Unregister instance @{aws.instance} from the load balancer" />
 												<ELBDeregisterInstance region="${aws.region}"
-													instanceId="@{aws.instance}" loadBalancerName="${aws.loadbalancer.name}" />
+													instanceId="@{aws.instance}" loadBalancerName="${aws.loadbalancer.name}" credentialsPath="${aws.credentials.properties}"/>
 
 												<echo
 													message="Stop jetty for instance @{aws.instance} - ${aws.instance.ip}" />
@@ -133,7 +133,7 @@
 												<echo
 													message="Register instance @{aws.instance} with the load balancer" />
 												<ELBRegisterInstance region="${aws.region}"
-													instanceId="@{aws.instance}" loadBalancerName="${aws.loadbalancer.name}" />
+													instanceId="@{aws.instance}" loadBalancerName="${aws.loadbalancer.name}" credentialsPath="${aws.credentials.properties}"/>
 
 											</then>
 										</if>
