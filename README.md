@@ -17,14 +17,14 @@ Technos :
 EC2 instance deployment process
 -------------------------------
 
-- Create a new Amazon Linux instance
-- Upgrade the OS 
+1. Create a new Amazon Linux instance
+2. Upgrade the OS 
     + sudo yum upgrade
-- Install JDK 1.7 // Optionnal for tomcat ? for jetty ?
+3. Install JDK 1.7 // Optionnal for tomcat ? for jetty ?
     + sudo yum install java-1.7.0-openjdk-devel
     + sudo yum remove java-1.6.0-openjdk
 
-- For jetty :
+4. For jetty :
   - Download and extract http://wiki.eclipse.org/Jetty/Starting/Downloads
   - Install as a service http://jawher.net/2009/12/18/manually-installing-a-recent-version-of-jetty-as-a-service-in-linux/
       + chkconfig --add jetty
@@ -38,7 +38,7 @@ EC2 instance deployment process
   - Upload war to $JETTY_HOME/webapps
   - Restart jetty 'service jetty restart'
 
-- sudoers https://forums.aws.amazon.com/thread.jspa?messageID=295990
+5. sudoers https://forums.aws.amazon.com/thread.jspa?messageID=295990
   - Comment the line 'Defaults requiretty' in /etc/sudoers
 
 
