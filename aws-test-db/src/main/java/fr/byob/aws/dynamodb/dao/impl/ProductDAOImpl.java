@@ -2,7 +2,7 @@ package fr.byob.aws.dynamodb.dao.impl;
 
 import static fr.byob.aws.dynamodb.dao.impl.AttributeValueConverter.integerToAttributeValue;
 import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.itemToProduct;
-import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.productToMap;
+import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.productToItem;
 
 import java.util.Map;
 
@@ -36,7 +36,7 @@ final class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void createProduct(Product product) throws DAOException {
 		try {
-			final Map<String, AttributeValue> item = productToMap(product);
+			final Map<String, AttributeValue> item = productToItem(product);
 			final PutItemRequest request = new PutItemRequest().withTableName(
 					tableName).withItem(item);
 			client.putItem(request);

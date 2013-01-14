@@ -43,7 +43,7 @@ final class ProductConverter {
 		return product;
 	}
 
-	public final static Map<String, AttributeValue> productToMap(Product product) {
+	public final static Map<String, AttributeValue> productToItem(Product product) {
 		checkNotNull(product, "Product cannot be null");
 		Map<String, AttributeValue> item = new HashMap<>();
         item.put(ID, integerToAttributeValue(product.getId()));

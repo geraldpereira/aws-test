@@ -3,7 +3,7 @@ package fr.byob.aws.dynamodb.dao.impl;
 import static fr.byob.aws.db.dao.ProductDAO.PRICE;
 import static fr.byob.aws.dynamodb.dao.impl.AttributeValueConverter.doubleToAttributeValue;
 import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.itemToProduct;
-import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.productToMap;
+import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.productToItem;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -32,16 +32,16 @@ public class ProductConverterTest {
 	
 	@Test
 	public void productToMapTest() {
-		Map<String, AttributeValue> newItem = productToMap(product);
+		Map<String, AttributeValue> newItem = productToItem(product);
 		assertEquals(item, newItem);
 		
 		product.setPrice(20d);
 		item.put(PRICE, doubleToAttributeValue(20d));
-		newItem = productToMap(product);
+		newItem = productToItem(product);
 		assertEquals(item, newItem);
 		
 		product.setPrice(null);
-		newItem = productToMap(product);
+		newItem = productToItem(product);
 		assertNull(newItem.get(PRICE));
 	}
 	
