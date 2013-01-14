@@ -10,6 +10,12 @@ import fr.byob.aws.domain.Product;
 import fr.byob.aws.domain.ProductBuilder;
 
 
+/**
+ * Uses Jersey client to test the aws-test war
+ * 
+ * @author gpereira
+ *
+ */
 public class ProductResourceTest extends AbstractResourceTest {
 
 	@Test

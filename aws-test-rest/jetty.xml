@@ -61,8 +61,8 @@
 				<Arg>
 					<New class="org.eclipse.jetty.http.ssl.SslContextFactory">
 						<Set name="keyStore">keystore</Set>
-						<Set name="keyStorePassword">OBF:1qxk1pk11v1v1xfj1v2j1pi51qw6</Set>
-						<Set name="keyManagerPassword">OBF:1qxk1pk11v1v1xfj1v2j1pi51qw6</Set>
+						<Set name="keyStorePassword">OBF:1pjz1r4p1pcg1xfj1xfj1pbi1r391pi7</Set>
+						<Set name="keyManagerPassword">OBF:1pjz1r4p1pcg1xfj1xfj1pbi1r391pi7</Set>
 					</New>
 				</Arg>
 				<Set name="port">8443</Set>

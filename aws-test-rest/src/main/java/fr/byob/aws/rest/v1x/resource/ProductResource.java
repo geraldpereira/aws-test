@@ -23,6 +23,14 @@ import fr.byob.aws.domain.Product;
 import fr.byob.aws.rest.exception.IllegalRequestException;
 import fr.byob.aws.rest.v1x.V1XConstants;
 
+
+/**
+ * 
+ * REST endpoint for the Product CRUD
+ * 
+ * @author gpereira
+ *
+ */
 @Path(V1XConstants.PATH + "/product/")
 public class ProductResource {
 

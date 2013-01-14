@@ -16,6 +16,15 @@ import com.google.inject.Singleton;
 
 import fr.byob.aws.commons.guice.InjectLogger;
 
+/**
+ * 
+ * Filter that adds Cross-origin resource sharing headers 
+ * 
+ * More information http://en.wikipedia.org/wiki/Cross-origin_resource_sharing  
+ * 
+ * @author gpereira
+ *
+ */
 @Singleton
 public class CORSHeadersFilter implements Filter {
 

@@ -44,6 +44,11 @@ The EC2 isntances are basic linux with a jetty server installed.
 5. sudoers https://forums.aws.amazon.com/thread.jspa?messageID=295990
   - Comment the line 'Defaults requiretty' in /etc/sudoers
 
+6. configuration
+	- create a directory /home/ec2-user/conf 
+	- add the following files in this directory : 
+		+ keystore : @see aws-test-rest module for keystore creation
+		+ credentials.properties : it contains AWS accessKey and sercretKey entries, used by the DynamoDBModule class (guice module).
 
 LoadBalancer creation process
 -----------------------------
@@ -51,3 +56,5 @@ LoadBalancer creation process
 1. Create a load balancer called AWSTestLoadBalancer
 2. Redirect port 80
 3. set ping path to /aws-test/index.jsp
+
+For SSL configuration, take a look at aws-test-rest/Readme.md

@@ -9,6 +9,11 @@ import fr.byob.aws.dynamodb.dao.impl.DynamoDBModule;
 import fr.byob.aws.rest.RESTJerseyServletModule;
 import fr.byob.aws.rest.ResourcesModule;
 
+/**
+ * 
+ * @author gpereira
+ *
+ */
 public class GuiceServletConfig extends GuiceServletContextListener {
 
 	@Override

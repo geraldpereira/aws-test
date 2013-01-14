@@ -12,6 +12,12 @@ import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 
 import fr.byob.aws.rest.CORSHeadersFilter;
 
+/**
+ * Guice module to configure the jersey servlet
+ * 
+ * @author gpereira
+ *
+ */
 public class RESTJerseyServletModule extends JerseyServletModule {
 
 	@Override

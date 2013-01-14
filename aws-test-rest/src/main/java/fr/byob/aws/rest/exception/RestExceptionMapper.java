@@ -6,6 +6,12 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 
+/**
+ * Maps an IllegalRequestException to an HTTP response
+ * 
+ * @author gpereira
+ *
+ */
 @Provider
 public class RestExceptionMapper implements ExceptionMapper<IllegalRequestException> {
 
