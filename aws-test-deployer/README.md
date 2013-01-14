@@ -57,4 +57,4 @@ LoadBalancer creation process
 2. Redirect port 80
 3. set ping path to /aws-test/index.jsp
 
-For SSL configuration, take a look at aws-test-rest/Readme.md
+For SSL configuration, take a look at https://github.com/Kojir0/aws-test/blob/master/aws-test-rest/README.md (last point)
