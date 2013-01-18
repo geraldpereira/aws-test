@@ -10,7 +10,7 @@ import fr.byob.aws.rest.RESTJerseyServletModule;
 import fr.byob.aws.rest.ResourcesModule;
 
 /**
- * 
+ * Guice injector servlet for AWS-TEST
  * @author gpereira
  *
  */

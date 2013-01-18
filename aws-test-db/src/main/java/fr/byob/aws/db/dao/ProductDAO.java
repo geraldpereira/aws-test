@@ -11,14 +11,14 @@ import fr.byob.aws.domain.Product;
  */
 public interface ProductDAO {
 
-	public static final  String ID = "Id";
-	public static final  String TITLE = "Title";
-	public static final  String ISBN = "ISBN";
-	public static final  String AUTHORS = "Authors";
-	public static final  String PRICE = "Price";
-	public static final  String CATEGORY = "Category";
-	public static final  String DIMENSIONS = "Dimensions";
-	public static final  String IN_PUBLICATION = "InPublication";
+	String ID = "Id";
+	String TITLE = "Title";
+	String ISBN = "ISBN";
+	String AUTHORS = "Authors";
+	String PRICE = "Price";
+	String CATEGORY = "Category";
+	String DIMENSIONS = "Dimensions";
+	String IN_PUBLICATION = "InPublication";
 
 	/**
 	 * Add a new product in the database

@@ -2,14 +2,20 @@ package fr.byob.aws.rest.exception;
 
 import com.sun.jersey.api.client.ClientResponse.Status;
 
+/**
+ * IllegalRequestException REST exception
+ * 
+ * @author gpereira
+ *
+ */
 public class IllegalRequestException extends RuntimeException {
 
 	private static final long serialVersionUID = -7421895058638572651L;
 	
 	private static final int HTTP_400 = 400;
 
-	private Status status;
-	private int errorCode;
+	private final Status status;
+	private final int errorCode;
 
 	public IllegalRequestException(final Exception exception) {
 		this(exception.getMessage());
@@ -29,16 +35,8 @@ public class IllegalRequestException extends RuntimeException {
 		return status;
 	}
 
-	public void setStatus(final Status status) {
-		this.status = status;
-	}
-
 	public int getErrorCode() {
 		return errorCode;
-	}
-
-	public void setErrorCode(final int errorCode) {
-		this.errorCode = errorCode;
 	}
 
 }

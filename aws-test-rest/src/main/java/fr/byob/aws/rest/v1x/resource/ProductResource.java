@@ -44,6 +44,11 @@ public class ProductResource {
 		this.dao = dao;
 	}
 
+	/**
+	 * Adds a product
+	 * @param product the product to add
+	 * @return the added product
+	 */
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -59,6 +64,11 @@ public class ProductResource {
 		return product;
 	}
 
+	/**
+	 * returns a product by its id
+	 * @param id the id of the product to return 
+	 * @return the product
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/get/{id}")
@@ -72,6 +82,10 @@ public class ProductResource {
 		}
 	}
 
+	/**
+	 * Deletes a product
+	 * @param id the product id
+	 */
 	@DELETE
 	// @GET Does not work with some web browsers
 	@Path("/delete/{id}")
@@ -85,6 +99,10 @@ public class ProductResource {
 		}
 	}
 
+	/**
+	 * Returns the machine hostname (to test the AWS Elastic Load Balancer)
+	 * @return
+	 */
 	@GET
 	@Path("/test")
 	@Produces({ MediaType.TEXT_PLAIN })

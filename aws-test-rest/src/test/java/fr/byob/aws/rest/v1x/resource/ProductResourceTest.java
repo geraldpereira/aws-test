@@ -3,6 +3,9 @@ package fr.byob.aws.rest.v1x.resource;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,10 +28,11 @@ public class ProductResourceTest extends AbstractResourceTest {
 
 	
 	@Test
-	public void simpleTest(){
+	public void simpleTest() throws UnknownHostException{
 		productResource.add(product);
 		assertEquals(product, productResource.get(product.getId()));
 		productResource.delete(product.getId());
+		assertEquals(InetAddress.getLocalHost().getHostName(), productResource.test());
 	}
 
 }
