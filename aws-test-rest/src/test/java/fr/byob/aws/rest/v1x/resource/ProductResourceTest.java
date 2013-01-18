@@ -7,13 +7,27 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+import fr.byob.aws.commons.guice.LoggerModule;
 import fr.byob.aws.domain.Product;
 import fr.byob.aws.domain.ProductBuilder;
+import fr.byob.aws.dynamodb.dao.impl.DynamoDBModule;
+import fr.byob.aws.rest.ResourcesModule;
 
-public class ProductResourceTest extends AbstractResourceTest {
+public class ProductResourceTest {
 
+	protected static Injector injector;
+	
+	@BeforeClass
+	public static void beforeClass() {
+		injector = Guice.createInjector(new LoggerModule(),
+				new ResourcesModule(), new DynamoDBModule());
+	}
 
 	private ProductResource productResource;
 	private Product product;
