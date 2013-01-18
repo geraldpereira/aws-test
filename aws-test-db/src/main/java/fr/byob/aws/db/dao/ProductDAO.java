@@ -3,21 +3,43 @@ package fr.byob.aws.db.dao;
 import fr.byob.aws.db.DAOException;
 import fr.byob.aws.domain.Product;
 
+/**
+ * CRUD for the Product bean 
+ * 
+ * @author gpereira
+ *
+ */
 public interface ProductDAO {
 
-	public final static String ID = "Id";
-	public final static String TITLE = "Title";
-	public final static String ISBN = "ISBN";
-	public final static String AUTHORS = "Authors";
-	public final static String PRICE = "Price";
-	public final static String CATEGORY = "Category";
-	public final static String DIMENSIONS = "Dimensions";
-	public final static String IN_PUBLICATION = "InPublication";
+	public static final  String ID = "Id";
+	public static final  String TITLE = "Title";
+	public static final  String ISBN = "ISBN";
+	public static final  String AUTHORS = "Authors";
+	public static final  String PRICE = "Price";
+	public static final  String CATEGORY = "Category";
+	public static final  String DIMENSIONS = "Dimensions";
+	public static final  String IN_PUBLICATION = "InPublication";
 
-	public void createProduct(Product product) throws DAOException;
+	/**
+	 * Add a new product in the database
+	 * @param product the created product to add
+	 * @throws DAOException if the add operation failed
+	 */
+	void createProduct(Product product) throws DAOException;
 
-	public Product retrieveProduct(Integer id) throws DAOException;
+	/**
+	 * Return a product from the db
+	 * @param id the id of the product to return 
+	 * @return the product with id 'id'
+	 * @throws DAOException if the retrieve operation failed
+	 */
+	Product retrieveProduct(Integer id) throws DAOException;
 
-	public void deleteProduct(Integer id) throws DAOException;
+	/**
+	 * Removes a product from DB 
+	 * @param id the product id
+	 * @throws DAOException if the delete operation failed
+	 */
+	void deleteProduct(Integer id) throws DAOException;
 
 }

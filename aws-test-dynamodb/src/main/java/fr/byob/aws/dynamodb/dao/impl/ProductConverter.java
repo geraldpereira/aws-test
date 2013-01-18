@@ -29,12 +29,16 @@ import fr.byob.aws.domain.Product;
 
 final class ProductConverter {
 
-	public final static Product itemToProduct(Map<String, AttributeValue> item) {
+	private ProductConverter(){
+		throw new IllegalAccessError();
+	}
+	
+	public static Product itemToProduct(Map<String, AttributeValue> item) {
 		checkNotNull(item, "Item cannot be null");
 		Product product = new Product(); 
 		product.setId(attributeValueToInteger(item.get(ID)));
 		product.setTitle(attributeValueToString(item.get(TITLE)));
-		product.setISBN(attributeValueToString(item.get(ISBN)));
+		product.setIsbn(attributeValueToString(item.get(ISBN)));
 		product.setAuthors(attributeValueToStrings(item.get(AUTHORS)));
 		product.setPrice(attributeValueToDouble(item.get(PRICE)));
 		product.setCategory(attributeValueToString(item.get(CATEGORY)));
@@ -43,12 +47,12 @@ final class ProductConverter {
 		return product;
 	}
 
-	public final static Map<String, AttributeValue> productToItem(Product product) {
+	public static Map<String, AttributeValue> productToItem(Product product) {
 		checkNotNull(product, "Product cannot be null");
 		Map<String, AttributeValue> item = new HashMap<>();
         item.put(ID, integerToAttributeValue(product.getId()));
         item.put(TITLE, stringToAttributeValue(product.getTitle()));
-        item.put(ISBN, stringToAttributeValue(product.getISBN()));
+        item.put(ISBN, stringToAttributeValue(product.getIsbn()));
         item.put(AUTHORS,stringsToAttributeValue(product.getAuthors()));
         item.put(PRICE, doubleToAttributeValue(product.getPrice()));
         item.put(CATEGORY, stringToAttributeValue(product.getCategory()));

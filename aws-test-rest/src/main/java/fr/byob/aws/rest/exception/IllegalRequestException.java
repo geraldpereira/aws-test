@@ -5,6 +5,8 @@ import com.sun.jersey.api.client.ClientResponse.Status;
 public class IllegalRequestException extends RuntimeException {
 
 	private static final long serialVersionUID = -7421895058638572651L;
+	
+	private static final int HTTP_400 = 400;
 
 	private Status status;
 	private int errorCode;
@@ -14,7 +16,7 @@ public class IllegalRequestException extends RuntimeException {
 	}
 
 	public IllegalRequestException(final String message) {
-		this(message, Status.BAD_REQUEST, 400);
+		this(message, Status.BAD_REQUEST, HTTP_400);
 	}
 
 	public IllegalRequestException(final String message, final Status status, final int errorCode) {

@@ -22,7 +22,7 @@ class SLF4JMembersInjector<T> implements MembersInjector<T> {
 		try {
 			field.set(t, logger);
 		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
+			throw new IllegalAccessError(e.getMessage());
 		}
 	}
 }

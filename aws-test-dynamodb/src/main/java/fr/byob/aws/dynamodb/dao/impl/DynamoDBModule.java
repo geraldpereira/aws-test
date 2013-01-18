@@ -26,7 +26,6 @@ public final class DynamoDBModule extends AbstractModule {
 							final String credentialsPath = System.getProperty("properties.credentials");
 							credentials = new PropertiesCredentials(Paths.get(credentialsPath).toAbsolutePath().toFile());
 						} catch (IOException e) {
-							e.printStackTrace();
 							return null;
 						}
 

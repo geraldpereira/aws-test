@@ -49,7 +49,7 @@ public class ProductDAOImplTest {
 	
 	@Test
 	public void nullAttributeTest() throws DAOException {
-		product.setISBN(null);
+		product.setIsbn(null);
 		productDAO.createProduct(product);
 		assertEquals(product, productDAO.retrieveProduct(product.getId()));
 		productDAO.deleteProduct(product.getId());
