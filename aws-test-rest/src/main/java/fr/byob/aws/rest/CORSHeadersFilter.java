@@ -41,7 +41,7 @@ public class CORSHeadersFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		final HttpServletResponse httpReponse = (HttpServletResponse) response;
 		log.info("Reponse headers added !");
-		httpReponse.setHeader("Access-Control-Allow-Origin", "*"); // TODO limiter à localhost et à l'url de l'appli cliente
+		httpReponse.setHeader("Access-Control-Allow-Origin", "*"); // TODO limiter a localhost et a l'url de l'appli cliente
 		httpReponse.setHeader("Access-Control-Allow-Methods","PUT, GET, POST, DELETE, OPTIONS");
 		httpReponse.setHeader("Access-Control-Allow-Headers",
 				"authorization,content-type");
