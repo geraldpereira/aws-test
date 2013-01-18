@@ -22,7 +22,7 @@ class SLF4JMembersInjector<T> implements MembersInjector<T> {
 		try {
 			field.set(t, logger);
 		} catch (IllegalAccessException e) {
-			throw new IllegalAccessError(e.getMessage());
+			logger.error("Failled to inject logger for class "+field.getDeclaringClass(),e);
 		}
 	}
 }
