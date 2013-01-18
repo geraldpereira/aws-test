@@ -39,6 +39,11 @@ public class ProductResource {
 
 	private final ProductDAO dao;
 
+	/**
+	 * Guice injected constructor
+	 * Warning : the logger will be null if this constructor is called outside of Guice
+	 * @param dao
+	 */
 	@Inject
 	public ProductResource(final ProductDAO dao) {
 		this.dao = dao;

@@ -26,6 +26,11 @@ final class ProductDAOImpl implements ProductDAO {
 	private final AmazonDynamoDB client;
 	private final String tableName;
 
+	/**
+	 * Guice injected constructor
+	 * @param client
+	 * @param tableName
+	 */
 	@Inject
 	public ProductDAOImpl(final AmazonDynamoDB client,
 			@Named("product") final String tableName) {

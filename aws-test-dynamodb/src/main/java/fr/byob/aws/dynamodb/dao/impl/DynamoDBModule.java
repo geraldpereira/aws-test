@@ -1,6 +1,9 @@
 package fr.byob.aws.dynamodb.dao.impl;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import com.amazonaws.auth.AWSCredentials;
@@ -13,6 +16,17 @@ import com.google.inject.name.Names;
 
 import fr.byob.aws.db.dao.ProductDAO;
 
+/**
+ * AmazonDynamoDB guice module 
+ * 
+ * The system property properties.credentials must be set to the path to an AWS crediential.properties file
+ * 
+ * accessKey=your_aws_key
+ * secretKey=your_aws_secret_key
+ * 
+ * @author gpereira
+ *
+ */
 public final class DynamoDBModule extends AbstractModule {
 
 	@Override
@@ -24,7 +38,10 @@ public final class DynamoDBModule extends AbstractModule {
 						AWSCredentials credentials;
 						try {
 							final String credentialsPath = System.getProperty("properties.credentials");
-							credentials = new PropertiesCredentials(Paths.get(credentialsPath).toAbsolutePath().toFile());
+							checkNotNull(credentialsPath);
+							final Path path = Paths.get(credentialsPath).toAbsolutePath();
+							checkNotNull(path,"The path is null : "+ credentialsPath);
+							credentials = new PropertiesCredentials(path.toFile());
 						} catch (IOException e) {
 							return null;
 						}

@@ -33,6 +33,11 @@ final class ProductConverter {
 		throw new IllegalAccessError();
 	}
 	
+	/**
+	 * item To Product converter
+	 * @param item
+	 * @return
+	 */
 	public static Product itemToProduct(Map<String, AttributeValue> item) {
 		checkNotNull(item, "Item cannot be null");
 		Product product = new Product(); 
@@ -47,6 +52,11 @@ final class ProductConverter {
 		return product;
 	}
 
+	/**
+	 * product To Item converter
+	 * @param product
+	 * @return
+	 */
 	public static Map<String, AttributeValue> productToItem(Product product) {
 		checkNotNull(product, "Product cannot be null");
 		Map<String, AttributeValue> item = new HashMap<>();

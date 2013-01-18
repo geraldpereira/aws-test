@@ -17,15 +17,19 @@ public class IllegalRequestException extends RuntimeException {
 	private final Status status;
 	private final int errorCode;
 
+	/**
+	 * Constructor
+	 * @param exception
+	 */
 	public IllegalRequestException(final Exception exception) {
 		this(exception.getMessage());
 	}
 
-	public IllegalRequestException(final String message) {
+	private IllegalRequestException(final String message) {
 		this(message, Status.BAD_REQUEST, HTTP_400);
 	}
 
-	public IllegalRequestException(final String message, final Status status, final int errorCode) {
+	private IllegalRequestException(final String message, final Status status, final int errorCode) {
 		super(message);
 		this.status = status;
 		this.errorCode = errorCode;
