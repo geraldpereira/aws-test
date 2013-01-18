@@ -5,8 +5,9 @@
 	<artifactId>aws-test</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
-
 	<properties>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
     	<guice.version>3.0</guice.version>
     	<aws.version>1.3.26</aws.version>
 	</properties>
