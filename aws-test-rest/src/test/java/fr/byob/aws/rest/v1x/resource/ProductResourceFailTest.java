@@ -1,10 +1,6 @@
 package fr.byob.aws.rest.v1x.resource;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -19,7 +15,6 @@ import fr.byob.aws.db.DAOException;
 import fr.byob.aws.db.dao.ProductDAO;
 import fr.byob.aws.domain.Product;
 import fr.byob.aws.domain.ProductBuilder;
-import fr.byob.aws.dynamodb.dao.impl.DynamoDBModule;
 import fr.byob.aws.rest.ResourcesModule;
 import fr.byob.aws.rest.exception.IllegalRequestException;
 
