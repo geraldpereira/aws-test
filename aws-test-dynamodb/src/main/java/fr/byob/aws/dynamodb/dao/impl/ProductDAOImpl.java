@@ -14,6 +14,7 @@ import com.amazonaws.services.dynamodb.model.GetItemRequest;
 import com.amazonaws.services.dynamodb.model.GetItemResult;
 import com.amazonaws.services.dynamodb.model.Key;
 import com.amazonaws.services.dynamodb.model.PutItemRequest;
+import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -52,11 +53,15 @@ final class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public Product retrieveProduct(Integer id) throws DAOException {
+		final Optional<AttributeValue> idValue = integerToAttributeValue(id);
+		if (!idValue.isPresent()){
+			throw new DAOException("Null id");
+		}
+				
 		try {
-
 			final GetItemRequest getItemRequest = new GetItemRequest().withTableName(
 					tableName).withKey(
-					new Key().withHashKeyElement(integerToAttributeValue(id)));
+					new Key().withHashKeyElement(idValue.get()));
 
 			final GetItemResult result = client.getItem(getItemRequest);
 
@@ -72,9 +77,13 @@ final class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void deleteProduct(Integer id) throws DAOException {
+		final Optional<AttributeValue> idValue = integerToAttributeValue(id);
+		if (!idValue.isPresent()){
+			throw new DAOException("Null id");
+		}
+		
 		try {
-
-			final Key key = new Key().withHashKeyElement(integerToAttributeValue(id));
+			final Key key = new Key().withHashKeyElement(idValue.get());
 
 			final DeleteItemRequest deleteItemRequest = new DeleteItemRequest()
 					.withTableName(tableName).withKey(key);

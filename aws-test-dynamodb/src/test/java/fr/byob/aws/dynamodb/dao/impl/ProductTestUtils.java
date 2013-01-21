@@ -25,15 +25,15 @@ final class ProductTestUtils {
 	public final static Map<String, AttributeValue> newItem() {
 
 		Map<String, AttributeValue> item = new HashMap<>();
-		item.put(ID, integerToAttributeValue(130));
-		item.put(TITLE, stringToAttributeValue("test1"));
-		item.put(ISBN, stringToAttributeValue("test2"));
+		item.put(ID, integerToAttributeValue(130).get());
+		item.put(TITLE, stringToAttributeValue("test1").get());
+		item.put(ISBN, stringToAttributeValue("test2").get());
 		item.put(AUTHORS,
-				stringsToAttributeValue(Arrays.asList("test3", "test4")));
-		item.put(PRICE, doubleToAttributeValue(20.99));
-		item.put(CATEGORY, stringToAttributeValue("test5"));
-		item.put(DIMENSIONS, stringToAttributeValue("test6"));
-		item.put(IN_PUBLICATION, booleanToAttributeValue(true));
+				stringsToAttributeValue(Arrays.asList("test3", "test4")).get());
+		item.put(PRICE, doubleToAttributeValue(20.99).get());
+		item.put(CATEGORY, stringToAttributeValue("test5").get());
+		item.put(DIMENSIONS, stringToAttributeValue("test6").get());
+		item.put(IN_PUBLICATION, booleanToAttributeValue(true).get());
 		return item;
 	}
 

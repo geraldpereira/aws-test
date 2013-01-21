@@ -36,7 +36,7 @@ public class ProductConverterTest {
 		assertEquals(item, newItem);
 		
 		product.setPrice(20d);
-		item.put(PRICE, doubleToAttributeValue(20d));
+		item.put(PRICE, doubleToAttributeValue(20d).get());
 		newItem = productToItem(product);
 		assertEquals(item, newItem);
 		
