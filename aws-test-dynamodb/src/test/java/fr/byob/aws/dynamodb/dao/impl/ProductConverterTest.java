@@ -4,9 +4,11 @@ import static fr.byob.aws.db.dao.ProductDAO.PRICE;
 import static fr.byob.aws.dynamodb.dao.impl.AttributeValueConverter.doubleToAttributeValue;
 import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.itemToProduct;
 import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.productToItem;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.Map;
 
 import org.junit.Before;
@@ -29,6 +31,16 @@ public class ProductConverterTest {
 		item = ProductTestUtils.newItem();
 	}
 	
+	
+	@Test(expected = InvocationTargetException.class)
+	public void testConstructor() throws ReflectiveOperationException {
+		final Constructor<ProductConverter> constructor = ProductConverter.class
+				.getDeclaredConstructor();
+		assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+		constructor.setAccessible(true);
+		constructor.newInstance();
+	}
+
 	
 	@Test
 	public void productToMapTest() {

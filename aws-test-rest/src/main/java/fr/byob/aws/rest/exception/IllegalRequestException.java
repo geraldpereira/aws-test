@@ -12,10 +12,7 @@ public class IllegalRequestException extends RuntimeException {
 
 	private static final long serialVersionUID = -7421895058638572651L;
 	
-	private static final int HTTP_400 = 400;
-
 	private final Status status;
-	private final int errorCode;
 
 	/**
 	 * Constructor
@@ -26,21 +23,15 @@ public class IllegalRequestException extends RuntimeException {
 	}
 
 	private IllegalRequestException(final String message) {
-		this(message, Status.BAD_REQUEST, HTTP_400);
+		this(message, Status.BAD_REQUEST);
 	}
 
-	private IllegalRequestException(final String message, final Status status, final int errorCode) {
+	private IllegalRequestException(final String message, final Status status) {
 		super(message);
 		this.status = status;
-		this.errorCode = errorCode;
 	}
 
 	public Status getStatus() {
 		return status;
 	}
-
-	public int getErrorCode() {
-		return errorCode;
-	}
-
 }

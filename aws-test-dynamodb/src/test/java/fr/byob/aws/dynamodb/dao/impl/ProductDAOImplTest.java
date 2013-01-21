@@ -47,6 +47,16 @@ public class ProductDAOImplTest {
 		productDAO.retrieveProduct(100);
 	}
 	
+	@Test(expected=DAOException.class)
+	public void nullIdRetrieveTest() throws DAOException {
+		productDAO.retrieveProduct(null);
+	}
+	
+	@Test(expected=DAOException.class)
+	public void nullIdDeleteTest() throws DAOException {
+		productDAO.deleteProduct(null);
+	}
+	
 	@Test
 	public void nullAttributeTest() throws DAOException {
 		product.setIsbn(null);
