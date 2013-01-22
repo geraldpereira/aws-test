@@ -14,6 +14,7 @@ final class ProductDAOImpl implements ProductDAO {
 
 	/**
 	 * Guice injected constructor
+	 * 
 	 * @param client
 	 * @param tableName
 	 */
@@ -27,7 +28,7 @@ final class ProductDAOImpl implements ProductDAO {
 		try {
 			mapper.save(product);
 			return product.getId();
-		}catch (AmazonServiceException e){
+		} catch (AmazonServiceException e) {
 			throw new DAOException(e);
 		}
 	}
@@ -35,8 +36,12 @@ final class ProductDAOImpl implements ProductDAO {
 	@Override
 	public Product retrieveProduct(String id) throws DAOException {
 		try {
-			return mapper.load(Product.class, id);
-		}catch (AmazonServiceException e){
+			final Product product = mapper.load(Product.class, id);
+			if (product == null) {
+				throw new DAOException("Product " + id + " not found.");
+			}
+			return product;
+		} catch (AmazonServiceException e) {
 			throw new DAOException(e);
 		}
 	}
@@ -47,7 +52,7 @@ final class ProductDAOImpl implements ProductDAO {
 			final Product product = new Product();
 			product.setId(id);
 			mapper.delete(product);
-		}catch (AmazonServiceException e){
+		} catch (AmazonServiceException e) {
 			throw new DAOException(e);
 		}
 	}
