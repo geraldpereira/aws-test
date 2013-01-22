@@ -45,12 +45,10 @@ public final class DynamoDBModule extends AbstractModule {
 						} catch (IOException e) {
 							return null;
 						}
-
 						final AmazonDynamoDBClient client = new AmazonDynamoDBClient(
 								credentials);
 						client.setEndpoint("dynamodb.eu-west-1.amazonaws.com");
-						final DynamoDBMapper mapper = new DynamoDBMapper(client); 
-						return mapper;
+						return new DynamoDBMapper(client); 
 					}
 				});
 		bind(String.class).annotatedWith(Names.named("product")).toInstance("ProductCatalog");

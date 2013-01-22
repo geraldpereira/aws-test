@@ -79,6 +79,8 @@ public class AbstractResourceTest {
 //		webResource = client.resource("https://localhost:8443/aws-test/api/v1.0");
 //		webResource = client.resource("http://aws-test.byob.fr/aws-test/api/v1.0");
 		webResource = client.resource("https://aws-test.byob.fr/aws-test/api/v1.0");
+//		webResource = client.resource("https://ec2-54-247-1-140.eu-west-1.compute.amazonaws.com/aws-test/api/v1.0");
+		
 
 	}
 }

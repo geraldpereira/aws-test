@@ -35,8 +35,7 @@ final class ProductDAOImpl implements ProductDAO {
 	@Override
 	public Product retrieveProduct(String id) throws DAOException {
 		try {
-			final Product product = mapper.load(Product.class, id);
-			return product;
+			return mapper.load(Product.class, id);
 		}catch (AmazonServiceException e){
 			throw new DAOException(e);
 		}
