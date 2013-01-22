@@ -1,22 +1,8 @@
 package fr.byob.aws.dynamodb.dao.impl;
 
-import static fr.byob.aws.dynamodb.dao.impl.AttributeValueConverter.integerToAttributeValue;
-import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.itemToProduct;
-import static fr.byob.aws.dynamodb.dao.impl.ProductConverter.productToItem;
-
-import java.util.Map;
-
 import com.amazonaws.AmazonServiceException;
-import com.amazonaws.services.dynamodb.AmazonDynamoDB;
-import com.amazonaws.services.dynamodb.model.AttributeValue;
-import com.amazonaws.services.dynamodb.model.DeleteItemRequest;
-import com.amazonaws.services.dynamodb.model.GetItemRequest;
-import com.amazonaws.services.dynamodb.model.GetItemResult;
-import com.amazonaws.services.dynamodb.model.Key;
-import com.amazonaws.services.dynamodb.model.PutItemRequest;
-import com.google.common.base.Optional;
+import com.amazonaws.services.dynamodb.datamodeling.DynamoDBMapper;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 import fr.byob.aws.db.DAOException;
 import fr.byob.aws.db.dao.ProductDAO;
@@ -24,8 +10,7 @@ import fr.byob.aws.domain.Product;
 
 final class ProductDAOImpl implements ProductDAO {
 
-	private final AmazonDynamoDB client;
-	private final String tableName;
+	private final DynamoDBMapper mapper;
 
 	/**
 	 * Guice injected constructor
@@ -33,67 +18,39 @@ final class ProductDAOImpl implements ProductDAO {
 	 * @param tableName
 	 */
 	@Inject
-	public ProductDAOImpl(final AmazonDynamoDB client,
-			@Named("product") final String tableName) {
-		this.client = client;
-		this.tableName = tableName;
+	public ProductDAOImpl(final DynamoDBMapper mapper) {
+		this.mapper = mapper;
 	}
 
 	@Override
-	public void createProduct(Product product) throws DAOException {
+	public String createProduct(Product product) throws DAOException {
 		try {
-			final Map<String, AttributeValue> item = productToItem(product);
-			final PutItemRequest request = new PutItemRequest().withTableName(
-					tableName).withItem(item);
-			client.putItem(request);
-		} catch (AmazonServiceException ase) {
-			throw new DAOException(ase);
+			mapper.save(product);
+			return product.getId();
+		}catch (AmazonServiceException e){
+			throw new DAOException(e);
 		}
 	}
 
 	@Override
-	public Product retrieveProduct(Integer id) throws DAOException {
-		final Optional<AttributeValue> idValue = integerToAttributeValue(id);
-		if (!idValue.isPresent()){
-			throw new DAOException("Null id");
-		}
-				
+	public Product retrieveProduct(String id) throws DAOException {
 		try {
-			final GetItemRequest getItemRequest = new GetItemRequest().withTableName(
-					tableName).withKey(
-					new Key().withHashKeyElement(idValue.get()));
-
-			final GetItemResult result = client.getItem(getItemRequest);
-
-			if (result.getItem() == null){
-				throw new DAOException("No result found");				
-			}
-			
-			return itemToProduct(result.getItem());
-		} catch (AmazonServiceException ase) {
-			throw new DAOException(ase);
+			final Product product = mapper.load(Product.class, id);
+			return product;
+		}catch (AmazonServiceException e){
+			throw new DAOException(e);
 		}
 	}
 
 	@Override
-	public void deleteProduct(Integer id) throws DAOException {
-		final Optional<AttributeValue> idValue = integerToAttributeValue(id);
-		if (!idValue.isPresent()){
-			throw new DAOException("Null id");
-		}
-		
+	public void deleteProduct(String id) throws DAOException {
 		try {
-			final Key key = new Key().withHashKeyElement(idValue.get());
-
-			final DeleteItemRequest deleteItemRequest = new DeleteItemRequest()
-					.withTableName(tableName).withKey(key);
-
-			client.deleteItem(deleteItemRequest);
-
-		} catch (AmazonServiceException ase) {
-			throw new DAOException(ase);
+			final Product product = new Product();
+			product.setId(id);
+			mapper.delete(product);
+		}catch (AmazonServiceException e){
+			throw new DAOException(e);
 		}
-
 	}
 
 }

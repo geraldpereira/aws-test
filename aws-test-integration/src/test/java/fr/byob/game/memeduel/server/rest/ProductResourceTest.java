@@ -1,6 +1,6 @@
 package fr.byob.game.memeduel.server.rest;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import javax.ws.rs.core.MediaType;
 
@@ -22,13 +22,13 @@ public class ProductResourceTest extends AbstractResourceTest {
 	public void testLevel() {
 
 		final Product product =  new ProductBuilder().build();
-		Product returned = webResource.path("/product/add/").type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).post(Product.class,product);
+		String id = webResource.path("/product/add/").type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).post(String.class,product);
+		assertNotNull(id);
+		product.setId(id);
+		final Product returned = webResource.path("/product/get/"+id).type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(Product.class);
 		assertEquals(product,returned);
 		
-		returned = webResource.path("/product/get/"+product.getId()).type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(Product.class);
-		assertEquals(product,returned);
-		
-		webResource.path("/product/delete/"+product.getId()).type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).delete();		
+		webResource.path("/product/delete/"+id).type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).delete();		
 
 	}
 

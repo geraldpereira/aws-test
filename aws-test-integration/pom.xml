@@ -3,7 +3,7 @@
   <parent>
     <groupId>fr.byob</groupId>
     <artifactId>aws-test</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
   </parent>
   <artifactId>aws-test-integration</artifactId>
   <description>
@@ -17,7 +17,7 @@
 		<dependency>
 			<groupId>fr.byob</groupId>
 			<artifactId>aws-test-model</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>2.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>

@@ -58,15 +58,14 @@ public class ProductResource {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/add")
-	public Product add(final Product product) {
+	public String add(final Product product) {
 		log.info("ADD " + product.getId());
 		try {
-			dao.createProduct(product);
+			return dao.createProduct(product);
 		} catch (final DAOException e) {
 			log.error("ADD failed", e);
 			throw new IllegalRequestException(e);
 		}
-		return product;
 	}
 
 	/**
@@ -77,7 +76,7 @@ public class ProductResource {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/get/{id}")
-	public Product get(@PathParam("id") final Integer id) {
+	public Product get(@PathParam("id") final String id) {
 		log.info("GET " + id);
 		try {
 			return dao.retrieveProduct(id);
@@ -94,7 +93,7 @@ public class ProductResource {
 	@DELETE
 	// @GET Does not work with some web browsers
 	@Path("/delete/{id}")
-	public void delete(@PathParam("id") final Integer id) {
+	public void delete(@PathParam("id") final String id) {
 		log.info("DELETE " + id);
 		try {
 			dao.deleteProduct(id);

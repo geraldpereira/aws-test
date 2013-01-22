@@ -1,7 +1,7 @@
 package fr.byob.aws.dynamodb.dao.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -37,14 +37,17 @@ public class ProductDAOImplTest {
 
 	@Test
 	public void simpleTest() throws DAOException {
-		productDAO.createProduct(product);
-		assertEquals(product, productDAO.retrieveProduct(product.getId()));
+		String id = productDAO.createProduct(product);
+		assertNotNull(id);
+		assertEquals(id, product.getId());
+		assertEquals(product, productDAO.retrieveProduct(id));
 		productDAO.deleteProduct(product.getId());
 	}
 	
-	@Test(expected=DAOException.class)
+	@Test
 	public void notFoundTest() throws DAOException {
-		productDAO.retrieveProduct(100);
+		final Product product = productDAO.retrieveProduct("100");
+		assertNull(product);
 	}
 	
 	@Test(expected=DAOException.class)
@@ -65,10 +68,5 @@ public class ProductDAOImplTest {
 		productDAO.deleteProduct(product.getId());
 	}
 	
-	@Test(expected=DAOException.class)
-	public void nullIdTest() throws DAOException {
-		product.setId(null);
-		productDAO.createProduct(product);
-	}
 
 }

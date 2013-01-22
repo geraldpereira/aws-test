@@ -8,8 +8,8 @@ import java.nio.file.Paths;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.PropertiesCredentials;
-import com.amazonaws.services.dynamodb.AmazonDynamoDB;
 import com.amazonaws.services.dynamodb.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodb.datamodeling.DynamoDBMapper;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
 import com.google.inject.name.Names;
@@ -31,10 +31,10 @@ public final class DynamoDBModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		bind(AmazonDynamoDB.class).toProvider(
-				new Provider<AmazonDynamoDB>() {
+		bind(DynamoDBMapper.class).toProvider(
+				new Provider<DynamoDBMapper >() {
 					@Override
-					public AmazonDynamoDB get() {
+					public DynamoDBMapper get() {
 						AWSCredentials credentials;
 						try {
 							final String credentialsPath = System.getProperty("properties.credentials");
@@ -46,14 +46,16 @@ public final class DynamoDBModule extends AbstractModule {
 							return null;
 						}
 
-						AmazonDynamoDBClient client = new AmazonDynamoDBClient(
+						final AmazonDynamoDBClient client = new AmazonDynamoDBClient(
 								credentials);
 						client.setEndpoint("dynamodb.eu-west-1.amazonaws.com");
-						return client;
+						final DynamoDBMapper mapper = new DynamoDBMapper(client); 
+						return mapper;
 					}
 				});
 		bind(String.class).annotatedWith(Names.named("product")).toInstance("ProductCatalog");
 		bind(ProductDAO.class).to(ProductDAOImpl.class);
+		
 	}
 
 }

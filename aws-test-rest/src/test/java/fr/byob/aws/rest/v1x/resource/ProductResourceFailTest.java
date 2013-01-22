@@ -37,17 +37,17 @@ public class ProductResourceFailTest {
 	private static final class ProductDAOFail implements ProductDAO{
 
 		@Override
-		public void createProduct(Product product) throws DAOException {
+		public String createProduct(Product product) throws DAOException {
 			throw new DAOException("Error");
 		}
 
 		@Override
-		public Product retrieveProduct(Integer id) throws DAOException {
+		public Product retrieveProduct(String id) throws DAOException {
 			throw new DAOException("Error");
 		}
 
 		@Override
-		public void deleteProduct(Integer id) throws DAOException {
+		public void deleteProduct(String id) throws DAOException {
 			throw new DAOException(new NullPointerException("Error"));
 		}
 		
@@ -73,11 +73,11 @@ public class ProductResourceFailTest {
 
 	@Test(expected=IllegalRequestException.class)
 	public void testGet(){
-		productResource.get(1);
+		productResource.get("1");
 	}
 	
 	@Test(expected=IllegalRequestException.class)
 	public void testDelete(){
-		productResource.delete(1);
+		productResource.delete("1");
 	}
 }
