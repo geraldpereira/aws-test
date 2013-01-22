@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 public class LoggerTest {
