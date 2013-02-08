@@ -51,7 +51,6 @@ public final class DynamoDBModule extends AbstractModule {
 						return new DynamoDBMapper(client); 
 					}
 				});
-		bind(String.class).annotatedWith(Names.named("product")).toInstance("ProductCatalog");
 		bind(ProductDAO.class).to(ProductDAOImpl.class);
 		
 	}
