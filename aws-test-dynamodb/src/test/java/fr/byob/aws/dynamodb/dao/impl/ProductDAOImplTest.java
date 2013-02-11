@@ -44,7 +44,7 @@ public class ProductDAOImplTest {
 		productDAO.deleteProduct(product.getId());
 	}
 	
-	@Test
+	@Test(expected=DAOException.class)
 	public void notFoundTest() throws DAOException {
 		final Product product = productDAO.retrieveProduct("100");
 		assertNull(product);
